@@ -64,6 +64,7 @@ function committeeDisagreement(
     logReg: Array<{ intent: string; score: number }>;
     naiveBayes: Array<{ intent: string; score: number }>;
     svm: Array<{ intent: string; score: number }>;
+    mlp: Array<{ intent: string; score: number }>;
     gradBoost: Array<{ intent: string; score: number }>;
   },
 ): number {
@@ -71,6 +72,7 @@ function committeeDisagreement(
     perModelScores.logReg,
     perModelScores.naiveBayes,
     perModelScores.svm,
+    perModelScores.mlp,
     perModelScores.gradBoost,
   ];
 

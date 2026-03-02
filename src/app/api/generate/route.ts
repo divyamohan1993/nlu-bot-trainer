@@ -51,9 +51,9 @@ export async function POST(request: NextRequest) {
 
   const { intentName, intentDescription, existingExamples, count } = body;
 
-  if (!intentName || !count) {
+  if (!intentName || !count || count < 1 || count > 50) {
     return NextResponse.json(
-      { error: "intentName and count are required" },
+      { error: "intentName is required and count must be between 1 and 50" },
       { status: 400 }
     );
   }

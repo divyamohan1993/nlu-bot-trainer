@@ -182,7 +182,7 @@ export default function IntentsPage() {
   return (
     <div className="flex">
       <Sidebar />
-      <main id="main-content" className="ml-64 flex-1 min-h-screen" role="main">
+      <main id="main-content" className="md:ml-64 flex-1 min-h-screen pt-14 md:pt-0" role="main">
         <div className="flex h-screen">
           {/* Intent List */}
           <div className="w-72 border-r border-white/5 bg-surface-1/50 flex flex-col">

@@ -6,6 +6,8 @@ import ConfidenceBar from "@/components/ConfidenceBar";
 import { loadData, loadEnsembleModel } from "@/lib/store";
 import { predictEnsemble, type EnsembleModel } from "@/lib/engine/ensemble";
 import { extractEntities } from "@/lib/entity-extractor";
+import { explainPrediction, type ExplanationResult } from "@/lib/engine/explainer";
+import { detectOOS, type OOSResult } from "@/lib/engine/oos-detector";
 import type { TrainingData, PredictionResult } from "@/types";
 
 interface ChatMessage {
@@ -14,6 +16,8 @@ interface ChatMessage {
   type: "user" | "bot";
   prediction?: PredictionResult;
   inferenceTimeUs?: number;
+  explanation?: ExplanationResult;
+  oosResult?: OOSResult;
   perModelScores?: {
     logReg: Array<{ intent: string; score: number }>;
     naiveBayes: Array<{ intent: string; score: number }>;
@@ -45,6 +49,8 @@ export default function TestPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [threshold, setThreshold] = useState(0.65);
   const [showModelBreakdown, setShowModelBreakdown] = useState(false);
+  const [showExplainer, setShowExplainer] = useState(false);
+  const [showOOS, setShowOOS] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -76,6 +82,9 @@ export default function TestPage() {
     const result = predictEnsemble(text, model);
     const entities = extractEntities(text, data.entities);
 
+    const explanation = showExplainer ? explainPrediction(text, model, 5) : undefined;
+    const oosResult = showOOS ? detectOOS(text, model) : undefined;
+
     const userMsg: ChatMessage = { id: `msg_${Date.now()}_u`, text, type: "user" };
     const prediction: PredictionResult = {
       text,
@@ -89,6 +98,8 @@ export default function TestPage() {
       type: "bot",
       prediction,
       inferenceTimeUs: result.inferenceTimeUs,
+      explanation,
+      oosResult,
       perModelScores: result.perModelScores,
     };
 
@@ -107,7 +118,7 @@ export default function TestPage() {
   return (
     <div className="flex">
       <Sidebar />
-      <main id="main-content" className="ml-64 flex-1 min-h-screen flex" role="main">
+      <main id="main-content" className="md:ml-64 flex-1 min-h-screen flex pt-14 md:pt-0" role="main">
         <div className="flex-1 flex flex-col">
           {/* Header */}
           <header className="p-6 border-b border-white/5 flex items-center justify-between">
@@ -117,7 +128,7 @@ export default function TestPage() {
                 {model ? `Ensemble v2 — trained ${new Date(model.trainedAt).toLocaleDateString()}` : "No trained model — go to Train first"}
               </p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <label className="flex items-center gap-1.5">
                 <input
                   type="checkbox"
@@ -125,17 +136,35 @@ export default function TestPage() {
                   onChange={(e) => setShowModelBreakdown(e.target.checked)}
                   className="w-3.5 h-3.5 accent-brand-500"
                 />
-                <span className="text-xs text-gray-500">Per-model scores</span>
+                <span className="text-xs text-gray-500">Per-model</span>
+              </label>
+              <label className="flex items-center gap-1.5">
+                <input
+                  type="checkbox"
+                  checked={showExplainer}
+                  onChange={(e) => setShowExplainer(e.target.checked)}
+                  className="w-3.5 h-3.5 accent-emerald-500"
+                />
+                <span className="text-xs text-gray-500">Explain</span>
+              </label>
+              <label className="flex items-center gap-1.5">
+                <input
+                  type="checkbox"
+                  checked={showOOS}
+                  onChange={(e) => setShowOOS(e.target.checked)}
+                  className="w-3.5 h-3.5 accent-amber-500"
+                />
+                <span className="text-xs text-gray-500">OOS</span>
               </label>
               <label className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">Threshold</span>
+                <span className="text-xs text-gray-500">Thr</span>
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={threshold * 100}
                   onChange={(e) => setThreshold(Number(e.target.value) / 100)}
-                  className="w-20 h-1 accent-brand-500"
+                  className="w-16 h-1 accent-brand-500"
                   aria-label="Confidence threshold"
                 />
                 <span className="text-xs text-gray-400 font-mono w-8 tabular-nums">{Math.round(threshold * 100)}%</span>
@@ -242,6 +271,69 @@ export default function TestPage() {
                               </div>
                             ))}
                           </div>
+                        </div>
+                      )}
+
+                      {/* OOS Detection */}
+                      {msg.oosResult && (
+                        <div className="mt-3 pt-3 border-t border-white/5">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className={`w-2 h-2 rounded-full ${msg.oosResult.isOOS ? "bg-amber-400" : "bg-green-400"}`} />
+                            <p className="text-xs font-medium text-gray-300">
+                              {msg.oosResult.isOOS ? "Out-of-Scope Detected" : "In-Scope"}
+                            </p>
+                            <span className="ml-auto text-[10px] font-mono text-gray-500">
+                              score: {msg.oosResult.oosScore.toFixed(3)}
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-4 gap-1.5">
+                            {[
+                              { label: "Entropy", value: msg.oosResult.signals.normalizedEntropy, color: "#f59f00" },
+                              { label: "MaxProb", value: msg.oosResult.signals.maxProbability, color: "#40c057" },
+                              { label: "Margin", value: msg.oosResult.signals.marginGap, color: "#4c6ef5" },
+                              { label: "Disagree", value: msg.oosResult.signals.committeeDisagreement, color: "#be4bdb" },
+                            ].map((s) => (
+                              <div key={s.label} className="bg-surface-3/50 rounded px-2 py-1 text-center">
+                                <p className="text-[9px] text-gray-500">{s.label}</p>
+                                <p className="text-[10px] font-mono" style={{ color: s.color }}>
+                                  {s.value.toFixed(3)}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Explainer — LIME-lite token importance */}
+                      {msg.explanation && msg.explanation.tokenExplanations.length > 0 && (
+                        <div className="mt-3 pt-3 border-t border-white/5">
+                          <p className="text-xs text-gray-500 mb-2">
+                            Token Importance <span className="text-[10px] text-gray-600">(LOO / {msg.explanation.computeTimeMs.toFixed(0)}ms)</span>
+                          </p>
+                          <div className="space-y-1">
+                            {msg.explanation.tokenExplanations.map((tok, i) => {
+                              const absContrib = Math.abs(tok.normalizedContribution);
+                              const isPositive = tok.contribution > 0;
+                              return (
+                                <div key={i} className="flex items-center gap-2">
+                                  <span className="text-xs text-gray-300 w-20 truncate font-mono">{tok.token}</span>
+                                  <div className="flex-1 h-1.5 bg-surface-3 rounded-full overflow-hidden relative">
+                                    <div
+                                      className="h-full rounded-full transition-all"
+                                      style={{
+                                        width: `${absContrib * 100}%`,
+                                        backgroundColor: isPositive ? "#40c057" : "#fa5252",
+                                      }}
+                                    />
+                                  </div>
+                                  <span className={`text-[10px] font-mono w-12 text-right ${isPositive ? "text-green-400" : "text-red-400"}`}>
+                                    {isPositive ? "+" : ""}{(tok.contribution * 100).toFixed(1)}%
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <p className="text-[10px] text-gray-600 mt-1.5">{msg.explanation.summary}</p>
                         </div>
                       )}
 

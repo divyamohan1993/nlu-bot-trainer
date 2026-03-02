@@ -110,10 +110,14 @@ export function predictSVM(
     rawScores.push({ intent: cls, score });
   }
 
-  // Platt scaling approximation: sigmoid(score)
+  // Numerically stable softmax (subtract max to prevent overflow)
+  let maxScore = -Infinity;
+  for (const s of rawScores) {
+    if (s.score > maxScore) maxScore = s.score;
+  }
   let expSum = 0;
   for (const s of rawScores) {
-    s.score = Math.exp(s.score);
+    s.score = Math.exp(s.score - maxScore);
     expSum += s.score;
   }
   for (const s of rawScores) {

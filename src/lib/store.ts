@@ -530,7 +530,17 @@ export function saveData(data: TrainingData): void {
   data.metadata.totalExamples = data.intents.reduce(
     (sum, i) => sum + i.examples.length, 0
   );
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (e) {
+    if (e instanceof DOMException && e.name === "QuotaExceededError") {
+      // Clear old single-classifier model to make room for training data
+      localStorage.removeItem(MODEL_KEY);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } else {
+      throw e;
+    }
+  }
 }
 
 export function loadModel(): TrainedModel | null {

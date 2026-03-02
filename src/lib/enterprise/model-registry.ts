@@ -135,7 +135,7 @@ export function registerModel(
     config: {
       hashDim: model.hashDim,
       ensembleWeights: model.metaWeights,
-      classifierTypes: ["logistic_regression", "naive_bayes_v2", "svm", "gradient_boost"],
+      classifierTypes: ["logistic_regression", "naive_bayes_v2", "svm", "mlp", "gradient_boost"],
     },
     parentVersion: latestVersion,
     tags: {},

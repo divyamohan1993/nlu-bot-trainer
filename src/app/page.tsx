@@ -44,7 +44,7 @@ export default function Dashboard() {
   return (
     <div className="flex">
       <Sidebar />
-      <main id="main-content" className="ml-64 flex-1 min-h-screen p-8" role="main">
+      <main id="main-content" className="md:ml-64 flex-1 min-h-screen p-4 pt-14 md:pt-8 md:p-8" role="main">
         {/* Header */}
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-white tracking-tight">Dashboard</h1>

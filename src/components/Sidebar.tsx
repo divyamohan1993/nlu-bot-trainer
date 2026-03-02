@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const NAV_ITEMS = [
   {
@@ -87,9 +87,19 @@ const NAV_ITEMS = [
     ),
   },
   {
+    href: "/import",
+    label: "Import",
+    shortcut: "9",
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+      </svg>
+    ),
+  },
+  {
     href: "/models",
     label: "Models",
-    shortcut: "9",
+    shortcut: "0",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
@@ -101,9 +111,19 @@ const NAV_ITEMS = [
 export default function Sidebar() {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Keyboard shortcuts: Alt+1 through Alt+5
+  // Close mobile sidebar on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Close on Escape
   const handleKeydown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setMobileOpen(false);
+      return;
+    }
     if (!e.altKey) return;
     const item = NAV_ITEMS.find((n) => n.shortcut === e.key);
     if (item) {
@@ -132,11 +152,8 @@ export default function Sidebar() {
     }
   };
 
-  return (
-    <aside
-      className="w-64 h-screen fixed left-0 top-0 bg-surface-1 border-r border-white/5 flex flex-col z-50"
-      aria-label="Main navigation"
-    >
+  const sidebarContent = (
+    <>
       {/* Logo */}
       <div className="p-6 border-b border-white/5">
         <div className="flex items-center gap-3">
@@ -153,7 +170,7 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav ref={navRef} className="flex-1 p-3 space-y-1" aria-label="Primary">
+      <nav ref={navRef} className="flex-1 p-3 space-y-1 overflow-y-auto" aria-label="Primary">
         {NAV_ITEMS.map((item, idx) => {
           const isActive = pathname === item.href;
           return (
@@ -172,7 +189,7 @@ export default function Sidebar() {
                 {item.icon}
               </span>
               {item.label}
-              <span className="ml-auto text-[10px] text-gray-600 font-mono" aria-label={`Alt+${item.shortcut}`}>
+              <span className="ml-auto text-[10px] text-gray-600 font-mono hidden sm:inline" aria-label={`Alt+${item.shortcut}`}>
                 {`Alt+${item.shortcut}`}
               </span>
             </Link>
@@ -185,10 +202,57 @@ export default function Sidebar() {
         <p className="text-[10px] text-gray-600 text-center">
           Ensemble v3: LR + CNB + SVM + MLP + GBM (171K params)
         </p>
-        <p className="text-[10px] text-gray-700 text-center">
-          Keyboard: Alt+1-9 to navigate
+        <p className="text-[10px] text-gray-700 text-center hidden md:block">
+          Keyboard: Alt+1-0 to navigate
         </p>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile hamburger button */}
+      <button
+        onClick={() => setMobileOpen(true)}
+        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-surface-2 border border-white/10 text-gray-400 hover:text-white transition-colors"
+        aria-label="Open navigation menu"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar — desktop: always visible, mobile: slide-in drawer */}
+      <aside
+        className={`
+          w-64 h-screen fixed left-0 top-0 bg-surface-1 border-r border-white/5 flex flex-col z-50
+          transition-transform duration-300 ease-in-out
+          ${mobileOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
+        `}
+        aria-label="Main navigation"
+      >
+        {/* Mobile close button */}
+        <button
+          onClick={() => setMobileOpen(false)}
+          className="md:hidden absolute top-4 right-4 p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/10 transition-colors"
+          aria-label="Close navigation menu"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        {sidebarContent}
+      </aside>
+    </>
   );
 }
