@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
+import { getCWEInfo } from "@/lib/vuln/cwe-database";
 
 // Lazy-loaded model artifacts
 let labels: Record<string, string> | null = null;
@@ -102,13 +103,22 @@ function predict(input: number[]): Array<{ cwe: string; score: number; name: str
   // Softmax
   const probs = softmax(logits);
 
-  // Top predictions
+  // Top predictions with CWE enrichment
   const results = probs
-    .map((score, i) => ({
-      cwe: labels![String(i)] || `CWE-${i}`,
-      score,
-      name: labels![String(i)] || "Unknown",
-    }))
+    .map((score, i) => {
+      const cweId = labels![String(i)] || `CWE-${i}`;
+      const info = getCWEInfo(cweId);
+      return {
+        cwe: cweId,
+        score,
+        name: info.name,
+        description: info.description,
+        severity: info.severity,
+        owasp: info.owasp,
+        remediation: info.remediation,
+        category: info.category,
+      };
+    })
     .sort((a, b) => b.score - a.score);
 
   return results;

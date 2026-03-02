@@ -6,6 +6,45 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Version
 
 ---
 
+## [2.2.0] — 2026-03-02
+
+### Added
+- **4-tab vulnerability triage** — CVE Description (existing), CVE ID Lookup, Code Scanner, Dependency Scan
+  - **CVE ID Lookup** — Type a CVE ID (e.g., CVE-2021-44228), fetches NVD metadata (CVSS score, severity, affected products, references), then runs ML classification with CWE agreement check
+  - **Code Scanner** — Paste code, get instant client-side vulnerability detection (~30 regex patterns across 9 categories: SQLi, XSS, Command Injection, Path Traversal, Hardcoded Secrets, Insecure Crypto, Deserialization, SSRF, Buffer Overflow). Zero network calls, runs in <5ms
+  - **Dependency Scan** — Paste package.json, requirements.txt, or pom.xml. Queries OSV API for known vulnerabilities with CVSS severity, fix versions, and CWE enrichment
+- **NVD API proxy** (`/api/nvd-lookup`) — CORS proxy for NVD REST API v2 with optional API key support (5 req/30s free, 50 req/30s with key)
+- **OSV API proxy** (`/api/osv-scan`) — Batched dependency vulnerability scanning via OSV.dev (10 concurrent, 100 dep cap, no auth needed)
+- **Shared vulnerability types** (`src/lib/vuln/types.ts`) — Centralized type definitions for all 4 vulnerability triage modes
+- **Dependency file parser** (`src/lib/vuln/dependency-parser.ts`) — Client-side parser for npm, PyPI, and Maven manifests
+
+### Changed
+- **Vulnerability page** — Complete rewrite from single-mode to 4-tab interface with independent state per tab, ARIA tablist keyboard navigation (ArrowLeft/ArrowRight)
+- **.env.example** — Added `NVD_API_KEY` documentation
+
+---
+
+## [2.1.0] — 2026-03-02
+
+### Added
+- **CWE enrichment database** — All 349 supported CWE classes now return human-readable names, descriptions, severity ratings, OWASP Top 10 2021 mapping, and remediation guidance
+  - Top ~50 critical CWEs hand-curated with specific remediation steps
+  - Remaining ~300 CWEs enriched via category-based fallback with MITRE CWE names
+- **Vulnerability UI redesign** — Top prediction card with severity badge, "What This Means" description, "How to Fix" remediation bullets, ranked alternatives with confidence bars
+- **Docker support** — Multi-stage Dockerfile (Node 20 Alpine), docker-compose.yml, `output: "standalone"` in Next.js config
+- **Documentation directory** (`docs/`)
+  - `ARCHITECTURE.md` — Algorithm deep dive, ensemble math, classifier internals, design system
+  - `DEPLOYMENT.md` — Docker, Vercel, GCP, Nginx config, model weights management
+  - `TRAINING.md` — Browser training, Python NLU pipeline, vulnerability model training, custom datasets
+  - `SELF-HOSTING.md` — What runs where, ONNX export, honest Ollama/deployment answer
+
+### Changed
+- **README.md** — Complete restructure covering both NLU Bot Trainer and Vulnerability Triage capabilities, deployment story, training guides, scalability tiers, and honest value proposition
+- **Vulnerability API** (`/api/classify-vuln`) — Response now includes `name`, `description`, `severity`, `owasp`, `remediation[]`, and `category` for each prediction
+- Updated SECURITY.md, CONTRIBUTING.md with vulnerability classifier scope and Docker workflow
+
+---
+
 ## [2.0.0] — 2026-03-02
 
 ### Added

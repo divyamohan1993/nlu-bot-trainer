@@ -12,22 +12,23 @@
 </p>
 
 <p align="center">
-  <strong>Enterprise-grade NLU bot trainer that runs everywhere — from a Pentium 4 to a GPU cluster.</strong>
+  <strong>Two ML engines. Zero cloud dependencies. One Next.js app.</strong>
 </p>
 
 <p align="center">
-  A research-grade intent classification engine with a 5-classifier stacking ensemble (~171K parameters),<br/>
-  autonomous self-learning, drift detection, and 7-platform export — all client-side in the browser.
+  Train intent classifiers in your browser. Triage CVE vulnerabilities with severity, OWASP mapping, and remediation guidance.<br/>
+  Both run on pure TypeScript math — no Python runtime, no API keys, no GPU required.
 </p>
 
 <p align="center">
+  <a href="#what-sentio-does">What It Does</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;
-  <a href="#architecture">Architecture</a> &bull;
-  <a href="#features">Features</a> &bull;
-  <a href="#self-learning">Self-Learning</a> &bull;
-  <a href="#enterprise">Enterprise</a> &bull;
-  <a href="#training-pipeline">Training Pipeline</a> &bull;
-  <a href="#api">API</a>
+  <a href="#nlu-bot-trainer">NLU Engine</a> &bull;
+  <a href="#vulnerability-triage">Vuln Triage</a> &bull;
+  <a href="#deploy-your-own">Deploy</a> &bull;
+  <a href="#train-your-own-models">Train</a> &bull;
+  <a href="#scalability">Scalability</a> &bull;
+  <a href="#api-reference">API</a>
 </p>
 
 <p align="center">
@@ -35,22 +36,22 @@
   <img src="https://img.shields.io/badge/Next.js-14.2-black?logo=next.js&logoColor=white" alt="Next.js" />
   <img src="https://img.shields.io/badge/React-18.3-61dafb?logo=react&logoColor=black" alt="React" />
   <img src="https://img.shields.io/badge/Zero_Dependencies-Pure_Math-40c057" alt="Zero ML Dependencies" />
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ed?logo=docker&logoColor=white" alt="Docker" />
   <img src="https://img.shields.io/badge/License-AGPL_3.0-blue" alt="License" />
-</p>
-
-<p align="center">
-  <code>nlu</code> &middot; <code>bot-trainer</code> &middot; <code>intent-classification</code> &middot; <code>self-learning</code> &middot; <code>ensemble-ml</code> &middot; <code>browser-ml</code> &middot; <code>zero-dependency</code>
 </p>
 
 ---
 
-## Why This Exists
+## What Sentio Does
 
-Most NLU tools force a choice: use a massive cloud model that costs money per request, or settle for a toy classifier that misclassifies half your inputs.
-
-**Sentio eliminates that tradeoff.** It ships a 5-model, 171K-parameter ensemble — Logistic Regression, Complement Naive Bayes, Linear SVM, a Multi-Layer Perceptron neural network, and Gradient Boosted Stumps — that trains in your browser tab and classifies in microseconds. No Python runtime. No API keys. No GPU. Just math.
-
-The kicker: it improves itself. The autonomous self-learning loop augments weak intents, generates pseudo-labels, applies curriculum learning, and only accepts changes that pass regression testing. You train it once. It gets better on its own.
+| Capability | NLU Bot Trainer | Vulnerability Triage |
+|------------|----------------|---------------------|
+| **What** | Train intent classifiers for chatbots | 4-mode vulnerability triage: CVE text, CVE ID lookup, code scanning, dependency audit |
+| **How** | 5-classifier stacking ensemble (171K params) | ResNet-MLP (9.7M params) + NVD API + regex engine + OSV API |
+| **Output** | Intent + confidence + per-model scores | CWE + severity + OWASP + remediation + CVSS + affected products + fix versions |
+| **Runs where** | 100% in-browser, zero server | ML: API route · Code scanner: browser · NVD/OSV: proxy routes |
+| **Training** | In-browser (30s) or Python pipeline | PyTorch on GCP VM (~2 hours) |
+| **Data** | 420 pre-loaded examples, 12 intents | 224K+ CVEs + NVD live data + OSV vulnerability database |
 
 ---
 
@@ -63,356 +64,231 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). That's it. No Docker, no Python, no environment setup.
+Open [http://localhost:3000](http://localhost:3000). Both engines are ready.
 
-Sentio ships with 420 pre-loaded training examples across 12 e-commerce customer support intents. Hit **Train** and you'll have a working model in under 3 seconds.
+**Or with Docker:**
 
-### What you get out of the box
+```bash
+docker compose up --build
+```
 
-| Intent | Examples | What it catches |
-|--------|----------|----------------|
-| `greet` | 35 | "hello", "hey there", "good morning" |
-| `goodbye` | 35 | "bye", "see you later", "ttyl" |
-| `thank_you` | 35 | "thanks", "appreciate it", "you're awesome" |
-| `order_status` | 35 | "where is my order", "track my package" |
-| `return_product` | 35 | "I want to return this", "return policy" |
-| `refund_request` | 35 | "I want my money back", "process refund" |
-| `complaint` | 35 | "this product is defective", "terrible quality" |
-| `product_inquiry` | 35 | "what sizes available", "is this in stock" |
-| `cancel_order` | 35 | "cancel my order", "stop my shipment" |
-| `payment_issue` | 35 | "payment failed", "double charged" |
-| `account_help` | 35 | "reset password", "can't log in" |
-| `speak_to_human` | 35 | "talk to a real person", "get me an agent" |
+### NLU — Try it now
+
+1. Open the app → 420 pre-loaded e-commerce support examples across 12 intents
+2. Click **Train** → Working model in under 3 seconds
+3. Go to /test → Type "where is my package?" → See `order_status` at 95%+ confidence
+
+### Vulnerability Triage — Try it now
+
+1. Go to /vulnerability → 4 tabs: Description, CVE Lookup, Code Scanner, Dependency Scan
+2. **CVE Lookup:** Type `CVE-2021-44228` → CVSS 10.0 CRITICAL, 342 affected products, ML classification
+3. **Code Scanner:** Click "Python Vulns" sample → 5 findings in <5ms, zero network calls
+4. **Dependency Scan:** Click "npm package.json" sample → OSV vulnerability report with fix versions
 
 ---
 
-## Architecture
+## NLU Bot Trainer
+
+A research-grade intent classification engine with autonomous self-learning. Five classifiers vote through learned meta-weights to produce predictions that no single model can match alone.
+
+### Architecture
 
 ```
-                        ┌────────────────────────────────────┐
-                        │         User Input Text            │
-                        └──────────────┬─────────────────────┘
-                                       │
-                        ┌──────────────▼─────────────────────┐
-                        │     Tokenizer V2 (6 strategies)    │
-                        │  word n-grams · char 3/4-grams     │
-                        │  syntactic · intent signals         │
-                        │  positional · subword               │
-                        └──────────────┬─────────────────────┘
-                                       │
-                        ┌──────────────▼─────────────────────┐
-                        │   MurmurHash3 Feature Hasher       │
-                        │   1024-dim Float32Array · L2 norm  │
-                        └──────────────┬─────────────────────┘
-                                       │
-         ┌──────────┬──────────┬───────┼───────┬──────────┐
-         ▼          ▼          ▼       ▼       ▼          │
-    ┌─────────┐┌─────────┐┌────────┐┌─────┐┌────────┐    │
-    │Logistic ││Complem. ││ Linear ││ MLP ││Gradient│    │
-    │Regress. ││  NB v2  ││  SVM   ││NN   ││ Boost  │    │
-    │(SGD+L2) ││(CNB'03) ││Pegasos ││128h ││150 stmp│    │
-    │ 12K par ││  7K par ││ 12K par││133K ││ 7K par │    │
-    └────┬────┘└────┬────┘└───┬────┘└──┬──┘└───┬────┘    │
-         │         │         │        │       │          │
-         └─────────┴────┬────┴────────┴───────┘          │
-                        │                                 │
-           ┌────────────▼──────────────┐                  │
-           │  Cross-Validated Weights   │                  │
-           │  (log-likelihood grid      │                  │
-           │   search, 5-way combos)    │                  │
-           └────────────┬──────────────┘                  │
-                        │                                 │
-                   ┌────────────▼──────────────┐                │
-                   │     Prediction Result      │◄───── Drift ──┘
-                   │  intent · confidence ·      │     Monitoring
-                   │  ranking · per-model scores │
-                   └─────────────────────────────┘
+  User Input → Tokenizer V2 (6 strategies) → MurmurHash3 (1024-dim)
+                                                    │
+         ┌──────────┬──────────┬──────────┬─────────┼─────────┐
+         ▼          ▼          ▼          ▼         ▼         │
+    Logistic   Complement   Linear     MLP     Gradient      │
+    Regress.    NB v2       SVM       128h     Boost         │
+     12K par    7K par      12K par   133K     7K par        │
+         └──────────┴────┬─────┴──────────┴─────────┘         │
+                         ▼                                     │
+              Cross-Validated Meta-Weights              Drift ─┘
+                         ▼                            Monitoring
+                 Prediction Result
 ```
 
-### Why five classifiers?
+**Why five classifiers?** Each fails differently. Linear models miss overlapping features. Naive Bayes struggles with correlations. SVMs overfit tight margins. Neural nets need lots of data. Boosted stumps miss smooth boundaries. The ensemble's error rate is strictly lower than any individual.
 
-Each model family makes different mistakes. Linear models fail on overlapping feature spaces. Naive Bayes struggles with correlated features. SVMs overfit tight margins. Neural networks need lots of data. Boosted stumps miss smooth boundaries.
+### Key Capabilities
 
-By combining all five through learned weights, the ensemble's error rate is strictly lower than any individual model. The meta-learner discovers the optimal weighting via 3-fold cross-validated log-likelihood grid search across all valid 5-way weight combinations.
+- **Self-learning loop** — Evaluates → diagnoses weak intents → augments data → pseudo-labels high-confidence predictions → curriculum-orders → retrains → validates. Accepts only if accuracy doesn't regress. Fully autonomous.
+- **Drift detection** — Page-Hinkley (concept drift), DDM (error rate drift), vocabulary distribution monitoring. Real-time dashboard.
+- **Model registry** — Semantic versioning, champion/challenger lifecycle, A/B testing with configurable traffic splits.
+- **7-platform export** — Rasa, Dialogflow, Lex, LUIS, Wit.ai, CSV, JSON.
+- **Zero dependencies** — Every algorithm (MurmurHash3, Pegasos SVM, CNB, backprop MLP, gradient boosted stumps) implemented from scratch in TypeScript.
 
-**Typical meta-weights on 420 examples:**
+### Performance
 
-| Model | Params | Weight | Role |
-|-------|--------|--------|------|
-| Logistic Regression | 12K | ~0% | Smooth probability calibration |
-| Complement NB | 7K | ~0% | Strong on class-imbalanced data |
-| Linear SVM | 12K | ~40% | Maximum margin separation |
-| Neural Net MLP | 133K | ~0% | Non-linear feature interactions (scales with data) |
-| Gradient Boost | 7K | ~60% | Non-linear decision boundaries |
+| Metric | Value |
+|--------|-------|
+| Inference | 1–6 ms (modern), 50–200μs (optimized path) |
+| Training | 30–60 seconds (full ensemble + meta-weights) |
+| Model size | ~2 MB (localStorage) |
+| Parameters | 171,772 |
 
-> The MLP's 133K parameters dominate the parameter budget. With 420 examples it correctly gets 0% weight (the grid search prevents overfitting). On larger datasets (1K+) the MLP begins to contribute significantly.
+For deep algorithm references and the math behind each classifier, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ---
 
-## Features
+## Vulnerability Triage
 
-### Core NLU Engine
+Four ways to find vulnerabilities — pick the one that matches what you have.
 
-- **MurmurHash3 feature hashing** — O(1) per feature, zero vocabulary mismatch between train and inference. 1024-dimensional signed hashing with collision bias reduction.
-- **Multi-strategy tokenization** — Six parallel feature extractors: word n-grams, character 3/4-grams (typo resilience), syntactic features (question/negation/emphasis), 14 domain-specific intent signals, positional features, and subword decomposition.
-- **INT8 quantization** — `quantizeToInt8()` compresses Float32 vectors to Int8 with 4x memory reduction. Quantized dot product stays in the int8 domain for cache-friendly inference.
-- **4-way unrolled dot product** — SIMD-friendly memory layout with loop unrolling for maximum throughput on any CPU, including decade-old hardware.
+| Tab | You have... | You get... |
+|-----|------------|-----------|
+| **CVE Description** | Prose text describing a vulnerability | CWE classification + severity + OWASP + remediation |
+| **CVE ID Lookup** | A CVE ID (e.g., CVE-2021-44228) | NVD metadata (CVSS, products, dates) + ML classification + CWE agreement check |
+| **Code Scanner** | Source code (any language) | Line-by-line vulnerability findings with CWE mapping and fix guidance |
+| **Dependency Scan** | package.json / requirements.txt / pom.xml | Known vulnerable dependencies with severity, fix versions, and CVE links |
 
-### Inference Speed
+### CVE ID Lookup
 
-On a modern machine, inference takes **50-200 microseconds** per query. On constrained hardware (Pentium 4 class), expect **1-5 milliseconds** — still imperceptible.
+Type a CVE ID, get everything: CVSS score and vector, severity rating, affected products, NVD references, plus ML-powered CWE classification cross-referenced against NVD's ground truth.
 
-The entire model (5 classifiers, 171K parameters + meta-weights + tokenizer config) fits in ~2 MB of localStorage. No network calls during inference.
+### Code Scanner
 
-### Training
+Paste code, get instant results. ~30 regex patterns detect SQL injection, XSS, command injection, path traversal, hardcoded secrets, insecure crypto, deserialization, SSRF, and buffer overflows. Runs entirely client-side in <5ms — zero network calls, zero data leaves your browser.
 
-Training 420 examples across 12 intents takes **1-3 seconds** in the browser. The bottleneck is meta-weight learning (grid search), not classifier training.
+> Pattern-based scanning catches common vulnerability patterns but cannot analyze data flow. Use alongside SAST tools for comprehensive coverage.
 
-| Phase | What happens | Time |
-|-------|-------------|------|
-| Tokenize | 6-strategy feature extraction on all examples | ~50ms |
-| Hash | MurmurHash3 into 1024-dim Float32Arrays | ~30ms |
-| Train LR | SGD with L2 regularization, 15 epochs | ~100ms |
-| Train CNB | Complement Naive Bayes with Lidstone smoothing | ~50ms |
-| Train SVM | Pegasos algorithm, 10 epochs, projection step | ~150ms |
-| Train MLP | Neural network (1024→128→12), 50 epochs, backprop | ~2000ms |
-| Train GBM | 150 gradient boosted stumps | ~400ms |
-| Meta-Learn | 3-fold CV log-likelihood grid search, 5-way combos | ~5000ms |
-| Validate | 3-fold stratified cross-validation | ~3000ms |
+### Dependency Scan
 
----
+Paste a manifest file. The scanner parses your dependencies, queries the [OSV vulnerability database](https://osv.dev), and returns known CVEs with severity, fix versions, and CWE enrichment. Supports npm (package.json), PyPI (requirements.txt), and Maven (pom.xml).
 
-## Self-Learning
+### ML Classification
 
-Sentio's autonomous self-learning loop is the system's most distinctive capability. It recursively improves the model without human input.
+For each CVE description (direct input or fetched via CVE ID), the classifier returns:
 
-### How it works
+- **CWE ID + human-readable name** — Not just "CWE-89", but "SQL Injection"
+- **Severity** — Critical / High / Medium / Low, mapped from CWE category and exploit impact
+- **OWASP Top 10 2021 category** — Where this weakness fits in the security landscape
+- **Remediation guidance** — 3–4 actionable steps specific to the weakness category
+- **Top 5 predictions** — Ranked alternatives with confidence scores
 
-```
-     ┌─────────────────────────────────────────────────┐
-     │                                                 │
-     ▼                                                 │
-  EVALUATE ──► DIAGNOSE ──► AUGMENT ──► SELF-TRAIN     │
-     │                                      │          │
-     │         CURRICULUM ◄─────────────────┘          │
-     │              │                                  │
-     │           RETRAIN                               │
-     │              │                                  │
-     │          VALIDATE                               │
-     │              │                                  │
-     │     ┌────────┴────────┐                         │
-     │     ▼                 ▼                         │
-     │   ACCEPT           REJECT                       │
-     │     │             (revert)                      │
-     │     └─────────────────┘─────────────────────────┘
-```
+### Model Details
 
-**Step by step:**
+- **Architecture:** ResNet-MLP (TF-IDF → 192 → 192+skip → 96 → 349 classes)
+- **Parameters:** 9.7M
+- **Training data:** 224K+ CVEs (NVD, 1999–2025)
+- **Accuracy:** 71% top-1, 85% top-5 across 349 CWE categories
+- **Inference:** 1–30ms server-side
 
-1. **Evaluate** — Measure accuracy on a held-out validation set (15% of data, never augmented).
-2. **Diagnose** — Identify intents with F1 < 0.95. Extract confusion pairs from the confusion matrix.
-3. **Augment** — Generate synthetic training data for weak intents using 6 techniques: synonym replacement, random insertion, random swap, random deletion, rule-based paraphrasing, and template generation.
-4. **Self-Train** — Generate a candidate pool of 200 synthetic utterances. Pseudo-label examples where confidence >= 92% AND 3 of 4 ensemble members agree.
-5. **Curriculum** — Reorder training data: easy examples first, hard examples last. Difficulty is measured by the model's own confidence on each example.
-6. **Retrain** — Train a fresh ensemble on augmented + pseudo-labeled + curriculum-ordered data.
-7. **Validate** — Compare new model against previous model on the held-out validation set.
-8. **Accept/Reject** — Accept if accuracy doesn't regress by more than 1%. Reject otherwise and revert all data changes.
+> 71% across 349 categories is a triage starting point, not a final determination. The model helps security teams prioritize — it doesn't replace expert analysis.
 
-### Safeguards against degeneration
+### CWE Enrichment Database
 
-Self-learning systems can spiral into garbage if unchecked. We prevent this with:
-
-| Safeguard | Mechanism |
-|-----------|-----------|
-| Confidence gate | Pseudo-labels require >= 92% confidence |
-| Committee consensus | 4 of 5 models must agree on pseudo-label |
-| Held-out validation | 15% of data is never augmented or pseudo-labeled |
-| Augmentation cap | Augmented data capped at 2x original dataset size |
-| Pseudo-label cap | Pseudo-labels capped at 30% of original dataset |
-| Regression testing | New model must not lose > 1% accuracy vs. previous |
-| Early stopping | Stops when improvement < 0.5% for 3 consecutive iterations |
-| Maximum iterations | Hard limit of 10 iterations (configurable to 50) |
-
-### Configuration
-
-All parameters are exposed in the Self-Learn UI:
-
-```typescript
-{
-  maxIterations: 10,              // Up to 50
-  minImprovement: 0.005,          // 0.5% minimum per iteration
-  pseudoLabelThreshold: 0.92,     // Confidence gate
-  maxAugmentRatio: 2.0,           // Max 2x original data
-  validationSplit: 0.15,          // 15% held out
-  augmentationsPerExample: 3,     // 3 variants per weak example
-  enablePseudoLabeling: true,     // Toggle pseudo-labels
-  enableAugmentation: true,       // Toggle augmentation
-  enableCurriculum: true,         // Toggle curriculum ordering
-}
-```
+All 349 supported CWE classes include enrichment data. The top ~50 most critical CWEs (SQL injection, XSS, buffer overflow, RCE, etc.) have hand-curated descriptions and remediation. The remaining ~300 use category-based enrichment with MITRE CWE names.
 
 ---
 
-## Enterprise
+## Deploy Your Own
 
-### Model Registry
+### Docker (recommended)
 
-Every trained model is automatically registered with semantic versioning:
+```bash
+docker compose up --build
+# App available at http://localhost:3000
+```
 
-- **Major** version — Architecture changes (new classifier types, different hash dimensions)
-- **Minor** version — Standard retraining (new data, hyperparameter changes)
-- **Patch** version — Self-learning improvements (augmentation, pseudo-labels)
+### Vercel
 
-Each version stores:
-- Full metrics (accuracy, per-intent F1, confusion matrix, training time)
-- Configuration (hash dim, ensemble weights, classifier types)
-- Lineage (parent version, training notes, tags)
-- The serialized model artifact (can be loaded for rollback or A/B testing)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/divyamohan1993/nlu-bot-trainer)
 
-**Status lifecycle:** `draft` → `staging` → `champion` / `challenger` → `retired`
+### GCP / Any VM
 
-### A/B Testing
+```bash
+git clone https://github.com/divyamohan1993/nlu-bot-trainer.git
+cd nlu-bot-trainer
+npm ci && npm run build
+node .next/standalone/server.js
+# Reverse proxy port 3000 with Nginx/Caddy
+```
 
-Run champion vs. challenger experiments with configurable traffic splitting:
-
-1. Select a challenger version from the registry
-2. Set traffic split (e.g., 10% to challenger)
-3. Run the test — each prediction is routed and accuracy is tracked
-4. Conclude when you have enough data (minimum 30 samples per arm)
-5. Winner is declared with a 2% improvement threshold. Ties are "inconclusive."
-
-### Drift Detection
-
-Three algorithms monitor production health in real-time:
-
-| Algorithm | What it detects | How it works |
-|-----------|----------------|-------------|
-| **Page-Hinkley** | Concept drift | Cumulative sum test on prediction confidence. Triggers when PH statistic exceeds threshold (lambda=50). |
-| **DDM** | Error rate drift | Monitors error rate + standard deviation. Warning at 2-sigma, drift at 3-sigma above historical minimum. |
-| **Vocabulary drift** | Distribution shift | Tracks new token ratio in incoming requests vs. training vocabulary baseline. |
-
-The dashboard shows real-time status: **Healthy** / **Warning** / **Critical**.
-
-### 7-Platform Export
-
-Export training data in any major NLU format:
-
-| Format | Platform | Use case |
-|--------|----------|----------|
-| **Rasa YAML v3.1** | Rasa Open Source | Self-hosted NLU |
-| **Dialogflow ES JSON** | Google Cloud | Google Assistant, Contact Center AI |
-| **Amazon Lex V2 JSON** | AWS | Alexa, Connect |
-| **Microsoft LUIS 7.0.0** | Azure | Bot Framework, Power Virtual Agents |
-| **Wit.ai JSON** | Meta | Messenger, WhatsApp bots |
-| **CSV** | Any | Data analysis, spreadsheets, custom pipelines |
-| **JSON** | Universal | Sentio native format |
-
-Import is supported for JSON (Sentio native format) and Rasa format.
+For detailed deployment guides (Nginx config, systemd service, model weights management), see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ---
 
-## Training Pipeline
+## Train Your Own Models
 
-For datasets beyond what the browser can handle (50K+ examples), or when you want GPU-accelerated embeddings and hyperparameter optimization, use the Python training pipeline.
+### NLU — Browser Training
 
-### Local training
+Just use the app. Add intents, add examples, click Train. The 5-classifier ensemble trains in 30–60 seconds entirely in your browser. No server, no setup.
+
+For large datasets (50K+), use the Python pipeline:
 
 ```bash
 cd training
 pip install -r requirements.txt
-
-# Quick mode (~30 seconds)
-python train_nlu.py --input training_data.json --output results/ --quick
-
-# Full optimization (~15 minutes)
-python train_nlu.py --input training_data.json --output results/ --optimize --n-trials 100
-
-# With sentence embeddings + knowledge distillation
-python train_nlu.py --input training_data.json --output results/ --optimize --embeddings --distill
+python train_nlu.py --input data.json --output results/ --optimize
 ```
 
-The Python pipeline trains 7 classifiers (SVM, Logistic Regression, Random Forest, Gradient Boosting, SGD, Voting Ensemble, + embedding-based variants), runs Optuna hyperparameter optimization, and exports a `model_ts_compatible.json` that drops directly into the TypeScript app.
+### Vulnerability Classifier — PyTorch
 
-### GCloud Spot VM training
-
-For heavy optimization runs, spin up a spot VM that auto-deletes after 2 hours:
+The vulnerability model was trained on a GCP VM with PyTorch:
 
 ```bash
-# Create spot VM (~$0.07 for 2 hours on e2-standard-4)
-./gcloud-spot-vm.sh --project=YOUR_PROJECT_ID
-
-# Upload data, train, download results in one command
-./sync_results.sh full INSTANCE_NAME us-central1-a
+# On a VM with 16GB+ RAM
+cd training/vuln-classifier
+pip install -r requirements.txt
+python train.py --epochs 50 --batch-size 256
+python export_weights.py  # → weights.json + tfidf_vocab.json + labels.json
 ```
 
-| Machine Type | vCPU | RAM | Spot $/hr | Best For |
-|---|---|---|---|---|
-| `e2-standard-4` | 4 | 16GB | ~$0.034 | Default (scikit-learn) |
-| `e2-standard-8` | 8 | 32GB | ~$0.067 | Large datasets (50K+) |
-| `e2-highmem-4` | 4 | 32GB | ~$0.045 | Sentence-transformers |
-| `n1-standard-4 + T4` | 4 | 15GB | ~$0.12 | GPU embeddings |
+Exported weights drop directly into `public/models/vuln-classifier/` for the Next.js API route.
 
-### Synthetic data generation
-
-Generate diverse training examples using Google Gemini:
-
-```bash
-export GOOGLE_API_KEY=your-key-here
-
-# Generate 50 examples per intent (~$0.02 total)
-python generate_synthetic.py \
-  --input training_data.json \
-  --output augmented_data.json \
-  --provider gemini \
-  --model gemini-2.0-flash \
-  --count 50
-```
-
-### External datasets
-
-Download and merge public NLU datasets:
-
-```bash
-# Best for customer support
-python download_datasets.py --dataset customer_support --output datasets/
-
-# Multi-domain benchmark
-python download_datasets.py --dataset clinc150,banking77 --output datasets/ --merge
-```
-
-| Dataset | Intents | Examples | Domain |
-|---------|---------|----------|--------|
-| **CLINC150** | 150 | 23,700 | Multi-domain + OOS |
-| **Banking77** | 77 | 13,083 | Banking |
-| **Customer Support** | 27 | 3,000+ | Customer service |
-| **HWU64** | 64 | ~25,000 | 21 domains |
-| **SNIPS** | 7 | ~14,000 | Voice assistant |
-| **ATIS** | 26 | ~5,800 | Travel |
+For full training guides (data preparation, hyperparameters, checkpoints, custom datasets), see [docs/TRAINING.md](docs/TRAINING.md).
 
 ---
 
-## API
+## Self-Hosting — The Honest Answer
 
-### Core Engine
+**"Can I run this with Ollama?"** — No. Sentio's models are classifiers, not LLMs. Ollama serves large language models. These are different things.
+
+**What actually runs where:**
+
+| Engine | Where It Runs | Infrastructure Needed |
+|--------|--------------|----------------------|
+| NLU Bot Trainer | In the browser | None. Zero. The user's browser IS the compute. |
+| Vulnerability Classifier | Next.js API route | A Node.js server (Docker container, Vercel, any VM) |
+
+The NLU engine needs no hosting at all — it trains and infers in the browser tab. The vulnerability classifier is a stateless API route that loads model weights on startup.
+
+For ONNX-based serving (Triton, ONNX Runtime), the training pipeline exports ONNX format. See [docs/SELF-HOSTING.md](docs/SELF-HOSTING.md).
+
+---
+
+## Scalability
+
+| Tier | Users | NLU | Vuln Classifier | Infra |
+|------|-------|-----|-----------------|-------|
+| 0 | 0–10K | Client-side (free) | Single container | 1 VM / Vercel |
+| 1 | 10K–100K | Client-side (free) | 2–4 containers behind LB | Horizontal scale |
+| 2 | 100K–1M | Client-side (free) | Auto-scaling group | Cloud Run / ECS |
+| 3 | 1M+ | Client-side (free) | Multi-region deployment | CDN + edge |
+
+**NLU scales infinitely for free.** Every user brings their own compute — the browser. 10 users or 10 million users, the server load is identical (serving static files).
+
+**Vulnerability classifier scales horizontally.** It's a stateless API route. No sessions, no database, no shared state. Add containers behind a load balancer.
+
+---
+
+## API Reference
+
+### NLU Engine
 
 ```typescript
 import { trainEnsemble, predictEnsemble } from "@/lib/engine/ensemble";
 
-// Train
 const model = trainEnsemble([
   { text: "hello", intent: "greet" },
-  { text: "goodbye", intent: "farewell" },
-  // ... more examples
+  { text: "track my order", intent: "order_status" },
 ]);
 
-// Predict (returns in microseconds)
 const result = predictEnsemble("hey there", model);
-
-console.log(result.intent);           // "greet"
-console.log(result.confidence);       // 0.94
-console.log(result.inferenceTimeUs);  // 127
-console.log(result.ranking);          // [{ name: "greet", confidence: 0.94 }, ...]
-console.log(result.perModelScores);   // { logReg: [...], naiveBayes: [...], svm: [...], mlp: [...], gradBoost: [...] }
+// result.intent → "greet"
+// result.confidence → 0.94
+// result.ranking → [{ name: "greet", confidence: 0.94 }, ...]
 ```
 
 ### Self-Learning
@@ -424,269 +300,95 @@ const result = runSelfLearningLoop(trainingData, {
   maxIterations: 10,
   pseudoLabelThreshold: 0.92,
   enableAugmentation: true,
-  enablePseudoLabeling: true,
-  enableCurriculum: true,
-}, (iteration) => {
-  console.log(`Iteration ${iteration.iteration}: ${(iteration.accuracy * 100).toFixed(1)}%`);
 });
-
-console.log(`Improved from ${result.initialAccuracy} to ${result.finalAccuracy}`);
-console.log(`Added ${result.totalNewExamples} synthetic examples`);
+// result.finalAccuracy, result.totalNewExamples
 ```
 
-### Model Registry
+### Vulnerability Classification
 
-```typescript
-import { registerModel, promoteToChampion, rollbackToVersion } from "@/lib/enterprise/model-registry";
-
-const version = registerModel(model, "minor", "Retrained with augmented data");
-promoteToChampion(version.id);
-// Later:
-const oldModel = rollbackToVersion("v_1.0.0_...");
 ```
+POST /api/classify-vuln
+Content-Type: application/json
+
+{ "text": "SQL injection in login endpoint...", "topK": 5 }
+```
+
+Response:
+```json
+{
+  "predictions": [{
+    "cwe": "CWE-89",
+    "score": 0.71,
+    "name": "SQL Injection",
+    "severity": "High",
+    "owasp": "A03:2021 Injection",
+    "remediation": ["Use parameterized queries...", "..."],
+    "category": "Injection"
+  }],
+  "inferenceMs": 1.2,
+  "modelInfo": { "parameters": "9.7M", "classes": 349, "architecture": "ResNet-MLP" }
+}
+```
+
+### CVE ID Lookup
+
+```
+GET /api/nvd-lookup?cveId=CVE-2021-44228
+```
+
+Returns NVD metadata: description, CVSS v3.1 score/vector/severity, ground-truth CWEs, affected products (CPE), references, and timestamps. Optional `NVD_API_KEY` env var for higher rate limits.
+
+### Dependency Vulnerability Scan
+
+```
+POST /api/osv-scan
+Content-Type: application/json
+
+{ "dependencies": [{ "name": "lodash", "version": "4.17.20", "ecosystem": "npm" }] }
+```
+
+Returns known vulnerabilities per dependency from [OSV.dev](https://osv.dev): vuln ID, summary, severity, fix version, published date, and CWE IDs. Max 100 dependencies per request.
 
 ### Export
 
 ```typescript
 import { exportTrainingData } from "@/lib/enterprise/export-formats";
 
-const { content, filename, mimeType } = exportTrainingData(data, "rasa");
-// content: YAML string for Rasa NLU v3.1
-// filename: "nlu-training-data.yml"
-// mimeType: "text/yaml"
+const { content, filename } = exportTrainingData(data, "rasa");
+// Rasa YAML v3.1, Dialogflow ES, Lex V2, LUIS, Wit.ai, CSV, JSON
 ```
 
 ---
 
-## Project Structure
+## Documentation
 
-```
-sentio/
-├── src/
-│   ├── app/                          # Next.js pages
-│   │   ├── page.tsx                  # Dashboard
-│   │   ├── analytics/page.tsx        # Confusion matrix, F1, drift monitoring
-│   │   ├── entities/page.tsx         # Entity management
-│   │   ├── intents/page.tsx          # Intent management
-│   │   ├── models/page.tsx           # Model registry, A/B testing
-│   │   ├── self-learn/page.tsx       # Autonomous improvement
-│   │   ├── test/page.tsx             # Chat-style test playground
-│   │   └── train/page.tsx            # Ensemble training
-│   │
-│   ├── components/                   # React components
-│   │   ├── Sidebar.tsx               # 8-page navigation (Alt+1-8)
-│   │   ├── StatsCard.tsx             # Metric display cards
-│   │   └── ConfidenceBar.tsx         # Animated confidence bars
-│   │
-│   ├── lib/
-│   │   ├── engine/                   # Core NLU engine
-│   │   │   ├── feature-hasher.ts     # MurmurHash3, quantization
-│   │   │   ├── tokenizer-v2.ts       # 6-strategy tokenizer
-│   │   │   ├── ensemble.ts           # Stacking ensemble
-│   │   │   └── classifiers/
-│   │   │       ├── logistic-regression.ts
-│   │   │       ├── naive-bayes-v2.ts
-│   │   │       ├── svm.ts
-│   │   │       ├── mlp.ts
-│   │   │       └── gradient-boost.ts
-│   │   │
-│   │   ├── self-learn/               # Self-learning pipeline
-│   │   │   ├── autonomous-loop.ts    # Recursive improvement
-│   │   │   ├── data-augmentation.ts  # EDA, templates, paraphrasing
-│   │   │   └── active-learning.ts    # 5 query strategies
-│   │   │
-│   │   ├── enterprise/               # Enterprise features
-│   │   │   ├── model-registry.ts     # Versioning, A/B testing
-│   │   │   ├── drift-detector.ts     # Page-Hinkley, DDM
-│   │   │   └── export-formats.ts     # 7-platform export
-│   │   │
-│   │   ├── store.ts                  # State persistence
-│   │   ├── classifier.ts             # Legacy classifier (v1)
-│   │   ├── tokenizer.ts              # Legacy tokenizer (v1)
-│   │   └── entity-extractor.ts       # Dictionary-based NER
-│   │
-│   └── types/
-│       └── index.ts                  # TypeScript interfaces
-│
-├── training/                         # Python training pipeline
-│   ├── train_nlu.py                  # Multi-classifier + Optuna HPO
-│   ├── generate_synthetic.py         # Gemini/Vertex AI synthetic data
-│   ├── download_datasets.py          # Kaggle/HuggingFace datasets
-│   ├── gcloud-spot-vm.sh             # GCP spot VM setup
-│   ├── sync_results.sh               # VM file sync
-│   ├── export_from_app.js            # Export training data from app
-│   ├── requirements.txt              # Python dependencies
-│   └── training_data.json            # Default 420-example dataset
-│
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-└── next.config.js
-```
-
----
-
-## Performance Characteristics
-
-### Browser (TypeScript engine)
-
-| Metric | Value | Notes |
-|--------|-------|-------|
-| Parameters | 171,772 | 5 classifiers (LR + NB + SVM + MLP + GBM) |
-| Inference latency | 1-6 ms | Modern hardware, 12 classes, 420 examples |
-| Training time | 30-60 seconds | Full 5-model ensemble + 5-way meta-weight learning |
-| Model size | ~2 MB | 5 classifiers in localStorage |
-| Memory footprint | ~20 MB | During training peak |
-| Cross-validation | 20-40 seconds | 3-fold stratified |
-| Self-learning loop | 60-180 seconds | 10 iterations with augmentation |
-
-### Python pipeline
-
-| Metric | Value | Notes |
-|--------|-------|-------|
-| Quick training | ~30 seconds | TF-IDF + 5 classifiers |
-| Full optimization | 5-15 minutes | Optuna, 100 trials per model |
-| With embeddings | 15-30 minutes | sentence-transformers + distillation |
-| Spot VM cost | $0.07-0.24 | 2-hour session, auto-delete |
-| Synthetic data | $0.01-0.05 | 600 examples via Gemini Flash |
-
----
-
-## Algorithms Reference
-
-<details>
-<summary><strong>MurmurHash3 Feature Hashing</strong></summary>
-
-Maps arbitrary string features to a fixed-size vector without maintaining a vocabulary dictionary. Uses MurmurHash3 (32-bit) with signed hashing: each feature is hashed to an index and a sign (+1/-1), which reduces collision bias through random sign cancellation.
-
-**Advantages over vocabulary-based approaches:**
-- O(1) memory per feature (no dictionary growth)
-- Zero vocabulary mismatch between train and inference
-- Supports infinite feature spaces (char n-grams, subword)
-- 1024 dimensions provides a good accuracy-size tradeoff for NLU-scale vocabularies
-
-**Reference:** Weinberger et al., "Feature Hashing for Large Scale Multitask Learning", ICML 2009.
-
-</details>
-
-<details>
-<summary><strong>Complement Naive Bayes</strong></summary>
-
-Standard Multinomial NB is biased toward majority classes because it estimates P(word|class) from only that class's documents. Complement NB instead estimates P(word|NOT class) and classifies by minimizing the complement class probability. This makes it significantly more robust to class imbalance.
-
-Weight normalization (dividing by the sum of absolute log-weights) makes predictions invariant to document length.
-
-**Reference:** Rennie et al., "Tackling the Poor Assumptions of Naive Bayes Text Classifiers", ICML 2003.
-
-</details>
-
-<details>
-<summary><strong>Pegasos SVM</strong></summary>
-
-Pegasos (Primal Estimated sub-GrAdient SOlver for SVM) solves the SVM optimization problem via stochastic gradient descent on the primal objective. Learning rate is eta = 1/(lambda * t), giving O(1/t) convergence — optimal for SVMs.
-
-The projection step ensures ||w|| <= 1/sqrt(lambda), which acts as implicit regularization.
-
-Probability estimates use Platt scaling (softmax approximation over raw SVM scores).
-
-**Reference:** Shalev-Shwartz et al., "Pegasos: Primal Estimated sub-GrAdient SOlver for SVM", Mathematical Programming 2011.
-
-</details>
-
-<details>
-<summary><strong>Gradient Boosted Stumps</strong></summary>
-
-Decision stumps (depth-1 trees) are the weakest learner, but 150 of them with gradient boosting become surprisingly powerful. Each stump finds the single best feature + threshold split that minimizes the residual loss.
-
-Feature and sample subsampling (50% features, 80% samples per round) prevents overfitting and adds diversity. Shrinkage factor of 0.1 ensures each stump contributes only a small correction. Softmax normalization on raw log-odds scores produces calibrated probabilities.
-
-</details>
-
-<details>
-<summary><strong>Multi-Layer Perceptron (MLP)</strong></summary>
-
-A single hidden-layer neural network (1024→128→12) trained with SGD and backpropagation. Xavier weight initialization prevents vanishing/exploding gradients. ReLU activation on the hidden layer enables non-linear feature interactions. Softmax output with cross-entropy loss for proper probability calibration.
-
-At 132,748 parameters, the MLP is the largest model in the ensemble. It requires more training data than the linear models to shine — with 420 examples it tends to overfit during cross-validation, but the meta-learner correctly assigns it 0% weight. On datasets of 1K+ examples, it becomes a major contributor.
-
-**Training:** 50 epochs, learning rate 0.01 with linear decay, L2 regularization (lambda=0.0001).
-
-</details>
-
-<details>
-<summary><strong>Page-Hinkley Drift Detection</strong></summary>
-
-A sequential hypothesis test for detecting abrupt changes in a data stream. Maintains a cumulative sum of deviations from the running mean. When the difference between the cumulative sum and its minimum exceeds threshold lambda, drift is declared.
-
-Parameters: delta = 0.005 (minimum magnitude of change to detect), lambda = 50 (detection threshold).
-
-**Reference:** Page, "Continuous Inspection Schemes", Biometrika 1954; Hinkley, "Inference About the Change-Point from Cumulative Sum Tests", Biometrika 1971.
-
-</details>
-
-<details>
-<summary><strong>DDM (Drift Detection Method)</strong></summary>
-
-Monitors the online error rate as a Bernoulli process. Under stable conditions, the error rate and its standard deviation have a known minimum. When the current error rate deviates significantly (2-sigma for warning, 3-sigma for drift), the model is flagged.
-
-Requires a minimum of 30 samples before activating to avoid false positives.
-
-**Reference:** Gama et al., "Learning with Drift Detection", SBIA 2004.
-
-</details>
-
----
-
-## Tech Stack
-
-| Layer | Technology | Why |
-|-------|-----------|-----|
-| Framework | Next.js 14.2 | App Router, SSG, zero-config |
-| UI | React 18 + Tailwind CSS 3.4 | Dark theme, glass morphism, WCAG 2.2 |
-| Language | TypeScript 5.5 (strict mode) | Type safety across 50+ source files |
-| ML Engine | Pure TypeScript | No Python dependency at runtime |
-| State | localStorage + IndexedDB | Persistent across sessions, no backend |
-| Training | Python 3.12 + scikit-learn + Optuna | Heavy optimization when needed |
-| Infra | GCloud Spot VMs | $0.07 for 2-hour training sessions |
-| Synthetic Data | Google Gemini API | $0.02 for 600 examples |
-
-### Design System
-
-Dark theme with a carefully crafted surface hierarchy:
-
-- `surface-0` (#0a0a0f) — Page background
-- `surface-1` (#12121a) — Sidebar
-- `surface-2` (#1a1a25) — Input fields
-- `surface-3` (#222233) — Cards, sections
-- `surface-4` (#2a2a3d) — Hover states
-
-Glass morphism cards with `backdrop-filter: blur(12px)` and 6% white borders.
-
-Brand palette: blue (#4c6ef5) to purple (#be4bdb) gradient. Each intent gets a unique color for instant visual identification.
+| Guide | What's Covered |
+|-------|---------------|
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Algorithm deep dive, ensemble math, classifier internals, design system |
+| [DEPLOYMENT.md](docs/DEPLOYMENT.md) | Docker, Vercel, GCP, Nginx config, model weights |
+| [TRAINING.md](docs/TRAINING.md) | Browser training, Python pipeline, vulnerability model training, custom data |
+| [SELF-HOSTING.md](docs/SELF-HOSTING.md) | What runs where, ONNX export, the honest Ollama answer |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Dev setup, PR process, code standards |
+| [SECURITY.md](SECURITY.md) | Supported versions, reporting vulnerabilities |
+| [CHANGELOG.md](CHANGELOG.md) | Version history |
 
 ---
 
 ## Accessibility
 
-- **WCAG 2.2 AA compliant** — All interactive elements have visible focus indicators, proper contrast ratios, and semantic HTML.
-- **Keyboard navigation** — Alt+1 through Alt+8 for instant page switching. Arrow keys for sidebar navigation. Full tab order.
-- **Screen reader support** — ARIA labels, roles, live regions for dynamic content, proper heading hierarchy.
-- **Reduced motion** — All animations respect `prefers-reduced-motion: reduce`.
-- **Skip navigation** — "Skip to main content" link for keyboard users.
-
----
+WCAG 2.2 AA compliant. Full keyboard navigation (Alt+1–8 page switching). ARIA labels, screen reader support, reduced motion, skip navigation.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, coding standards, and pull request guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Security
 
-See [SECURITY.md](SECURITY.md) for our security policy and how to report vulnerabilities.
+See [SECURITY.md](SECURITY.md).
 
 ## License
 
-This project is licensed under the [GNU Affero General Public License v3.0](LICENSE) — see the LICENSE file for details.
+[GNU Affero General Public License v3.0](LICENSE)
 
 ---
 

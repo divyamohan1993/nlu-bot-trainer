@@ -1,0 +1,11 @@
+services:
+  sentio:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # Mount model weights if not baked into the image
+      - ./public/models:/app/public/models
+    restart: unless-stopped

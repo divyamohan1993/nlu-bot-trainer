@@ -1,8 +1,8 @@
 {
   "name": "nlu-bot-trainer",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "private": false,
-  "description": "Enterprise-grade NLU bot trainer with 5-classifier stacking ensemble (171K params) — runs entirely in the browser",
+  "description": "NLU bot trainer (5-classifier ensemble, 171K params, browser-side) + 4-mode vulnerability triage: ML classification (9.7M param ResNet-MLP, 349 CWEs), CVE ID lookup (NVD), code scanning (regex), dependency audit (OSV)",
   "author": "Divya Mohan <divyamohan1993@gmail.com> (https://dmj.one)",
   "license": "AGPL-3.0",
   "homepage": "https://github.com/divyamohan1993/nlu-bot-trainer",
@@ -23,13 +23,21 @@
     "neural-network",
     "browser-ml",
     "zero-dependency",
-    "self-learning"
+    "self-learning",
+    "vulnerability",
+    "cwe",
+    "cve",
+    "security",
+    "docker"
   ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker build -t sentio .",
+    "docker:run": "docker run -p 3000:3000 sentio",
+    "docker:up": "docker compose up --build"
   },
   "dependencies": {
     "next": "^14.2.0",
