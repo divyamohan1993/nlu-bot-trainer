@@ -1,0 +1,66 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea that would make NLU Bot Trainer better? We'd love to hear it.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the pain point or limitation you're experiencing.
+      placeholder: "I need to export models in ONNX format for deployment on edge devices, but only 7 formats are supported."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How do you think this should work?
+      placeholder: "Add an ONNX export option in the Train page export dropdown that converts the ensemble weights to an ONNX graph."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Core Engine (classifiers, tokenizer, ensemble)
+        - Self-Learning
+        - Enterprise (registry, A/B testing, drift)
+        - Export / Import
+        - Training Pipeline (GCloud, Python)
+        - UI / UX
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this to you?
+      options:
+        - Nice to have
+        - Important — affects my workflow
+        - Critical — blocking my use case
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds or alternative approaches you've thought of.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Mockups, references, links to papers or similar implementations.

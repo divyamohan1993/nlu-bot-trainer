@@ -1,0 +1,30 @@
+# NLU Training Pipeline Requirements
+# Install: pip install -r requirements.txt
+
+# Core ML
+scikit-learn>=1.5
+numpy>=1.26
+pandas>=2.2
+joblib>=1.4
+scipy>=1.14
+
+# Sentence Embeddings
+sentence-transformers>=3.0
+
+# Hyperparameter Optimization
+optuna>=4.0
+
+# Model Export
+onnxruntime>=1.19
+
+# Dataset Downloads
+kagglehub>=0.3
+datasets>=3.0
+
+# Google Cloud (optional -- for Vertex AI and GCS)
+google-cloud-aiplatform>=1.70
+google-cloud-storage>=2.18
+google-generativeai>=0.8
+
+# Utilities
+tqdm>=4.66

@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface-0: #0a0a0f;
+  --surface-1: #12121a;
+  --surface-2: #1a1a25;
+  --surface-3: #222233;
+  --surface-4: #2a2a3d;
+  --focus-ring: #748ffc;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a3d transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #2a2a3d;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #3a3a50;
+}
+
+body {
+  background: var(--surface-0);
+  color: #e4e4ef;
+}
+
+/* ===== Accessibility: Focus styles ===== */
+*:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip nav link */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--focus-ring);
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: top 0.2s;
+}
+
+.skip-nav:focus {
+  top: 0;
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(18, 18, 26, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glow-brand {
+    box-shadow: 0 0 20px rgba(76, 110, 245, 0.15),
+      0 0 60px rgba(76, 110, 245, 0.05);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #748ffc 0%, #be4bdb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.confidence-bar {
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.entity-highlight {
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}

@@ -1,0 +1,91 @@
+name: Bug Report
+description: Report something that isn't working correctly
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please fill in the details below so we can investigate quickly.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+      placeholder: "When I click Train with 5 intents, the page freezes and no model is produced."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should have happened?
+      placeholder: "Training should complete and display accuracy metrics."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps to reproduce the behavior.
+      value: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: dropdown
+    id: page
+    attributes:
+      label: Which page is affected?
+      options:
+        - Dashboard
+        - Data Management
+        - Train
+        - Test
+        - Analytics
+        - Self-Learn
+        - Models
+        - Settings
+        - Multiple / Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Console errors
+      description: Open DevTools (F12) → Console tab. Paste any errors here.
+      render: shell
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots, screen recordings, training data size, anything else relevant.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and this hasn't been reported
+          required: true
+        - label: I'm using the latest version
+          required: false

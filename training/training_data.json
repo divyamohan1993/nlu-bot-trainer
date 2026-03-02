@@ -1,0 +1,1805 @@
+{
+  "intents": [
+    {
+      "name": "greet",
+      "description": "Customer greets or initiates conversation",
+      "examples": [
+        {
+          "text": "hello",
+          "entities": []
+        },
+        {
+          "text": "hi there",
+          "entities": []
+        },
+        {
+          "text": "good morning",
+          "entities": []
+        },
+        {
+          "text": "hey",
+          "entities": []
+        },
+        {
+          "text": "hi",
+          "entities": []
+        },
+        {
+          "text": "good afternoon",
+          "entities": []
+        },
+        {
+          "text": "good evening",
+          "entities": []
+        },
+        {
+          "text": "howdy",
+          "entities": []
+        },
+        {
+          "text": "what's up",
+          "entities": []
+        },
+        {
+          "text": "greetings",
+          "entities": []
+        },
+        {
+          "text": "hello there",
+          "entities": []
+        },
+        {
+          "text": "hey there",
+          "entities": []
+        },
+        {
+          "text": "hiya",
+          "entities": []
+        },
+        {
+          "text": "yo",
+          "entities": []
+        },
+        {
+          "text": "sup",
+          "entities": []
+        },
+        {
+          "text": "good day",
+          "entities": []
+        },
+        {
+          "text": "nice to meet you",
+          "entities": []
+        },
+        {
+          "text": "pleased to meet you",
+          "entities": []
+        },
+        {
+          "text": "morning",
+          "entities": []
+        },
+        {
+          "text": "evening",
+          "entities": []
+        },
+        {
+          "text": "hey how are you",
+          "entities": []
+        },
+        {
+          "text": "hello is anyone there",
+          "entities": []
+        },
+        {
+          "text": "hi I need some help",
+          "entities": []
+        },
+        {
+          "text": "hey good to see you",
+          "entities": []
+        },
+        {
+          "text": "aloha",
+          "entities": []
+        },
+        {
+          "text": "well hello there",
+          "entities": []
+        },
+        {
+          "text": "hi again",
+          "entities": []
+        },
+        {
+          "text": "hey how's it going",
+          "entities": []
+        },
+        {
+          "text": "good morning I have a question",
+          "entities": []
+        },
+        {
+          "text": "afternoon",
+          "entities": []
+        },
+        {
+          "text": "hey can someone help me",
+          "entities": []
+        },
+        {
+          "text": "hello hello",
+          "entities": []
+        },
+        {
+          "text": "oh hi",
+          "entities": []
+        },
+        {
+          "text": "hey what's going on",
+          "entities": []
+        },
+        {
+          "text": "hi I'm new here",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "goodbye",
+      "description": "Customer ends conversation",
+      "examples": [
+        {
+          "text": "bye",
+          "entities": []
+        },
+        {
+          "text": "goodbye",
+          "entities": []
+        },
+        {
+          "text": "see you later",
+          "entities": []
+        },
+        {
+          "text": "take care",
+          "entities": []
+        },
+        {
+          "text": "see you",
+          "entities": []
+        },
+        {
+          "text": "have a nice day",
+          "entities": []
+        },
+        {
+          "text": "catch you later",
+          "entities": []
+        },
+        {
+          "text": "talk to you soon",
+          "entities": []
+        },
+        {
+          "text": "bye bye",
+          "entities": []
+        },
+        {
+          "text": "good night",
+          "entities": []
+        },
+        {
+          "text": "farewell",
+          "entities": []
+        },
+        {
+          "text": "until next time",
+          "entities": []
+        },
+        {
+          "text": "I'm leaving now",
+          "entities": []
+        },
+        {
+          "text": "that's all I needed",
+          "entities": []
+        },
+        {
+          "text": "gotta go",
+          "entities": []
+        },
+        {
+          "text": "I'm done here",
+          "entities": []
+        },
+        {
+          "text": "have a great day",
+          "entities": []
+        },
+        {
+          "text": "peace out",
+          "entities": []
+        },
+        {
+          "text": "later",
+          "entities": []
+        },
+        {
+          "text": "ttyl",
+          "entities": []
+        },
+        {
+          "text": "alright bye then",
+          "entities": []
+        },
+        {
+          "text": "I'll be going now",
+          "entities": []
+        },
+        {
+          "text": "thanks that's all bye",
+          "entities": []
+        },
+        {
+          "text": "ok I'm off",
+          "entities": []
+        },
+        {
+          "text": "see ya",
+          "entities": []
+        },
+        {
+          "text": "signing off now",
+          "entities": []
+        },
+        {
+          "text": "I have to go now goodbye",
+          "entities": []
+        },
+        {
+          "text": "night night",
+          "entities": []
+        },
+        {
+          "text": "cheers bye",
+          "entities": []
+        },
+        {
+          "text": "ok thanks bye",
+          "entities": []
+        },
+        {
+          "text": "that was everything I needed goodbye",
+          "entities": []
+        },
+        {
+          "text": "cya later",
+          "entities": []
+        },
+        {
+          "text": "adios",
+          "entities": []
+        },
+        {
+          "text": "I'm heading out",
+          "entities": []
+        },
+        {
+          "text": "toodles",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "thank_you",
+      "description": "Customer expresses gratitude",
+      "examples": [
+        {
+          "text": "thank you",
+          "entities": []
+        },
+        {
+          "text": "thanks a lot",
+          "entities": []
+        },
+        {
+          "text": "appreciate it",
+          "entities": []
+        },
+        {
+          "text": "thanks so much",
+          "entities": []
+        },
+        {
+          "text": "thanks",
+          "entities": []
+        },
+        {
+          "text": "much appreciated",
+          "entities": []
+        },
+        {
+          "text": "that's very helpful",
+          "entities": []
+        },
+        {
+          "text": "you've been great",
+          "entities": []
+        },
+        {
+          "text": "thank you very much",
+          "entities": []
+        },
+        {
+          "text": "great help thanks",
+          "entities": []
+        },
+        {
+          "text": "wonderful thank you",
+          "entities": []
+        },
+        {
+          "text": "thanks for your help",
+          "entities": []
+        },
+        {
+          "text": "I really appreciate your assistance",
+          "entities": []
+        },
+        {
+          "text": "you're awesome thanks",
+          "entities": []
+        },
+        {
+          "text": "perfect thanks",
+          "entities": []
+        },
+        {
+          "text": "cheers mate",
+          "entities": []
+        },
+        {
+          "text": "brilliant thank you",
+          "entities": []
+        },
+        {
+          "text": "that was helpful",
+          "entities": []
+        },
+        {
+          "text": "I appreciate that",
+          "entities": []
+        },
+        {
+          "text": "thank you for the quick response",
+          "entities": []
+        },
+        {
+          "text": "amazing service thank you",
+          "entities": []
+        },
+        {
+          "text": "that solved my issue thanks",
+          "entities": []
+        },
+        {
+          "text": "exactly what I needed thanks",
+          "entities": []
+        },
+        {
+          "text": "you really helped me out",
+          "entities": []
+        },
+        {
+          "text": "great job thanks so much",
+          "entities": []
+        },
+        {
+          "text": "super helpful I appreciate it",
+          "entities": []
+        },
+        {
+          "text": "thankful for your patience",
+          "entities": []
+        },
+        {
+          "text": "that fixed it thank you",
+          "entities": []
+        },
+        {
+          "text": "grateful for the assistance",
+          "entities": []
+        },
+        {
+          "text": "nice one thanks",
+          "entities": []
+        },
+        {
+          "text": "splendid work thank you",
+          "entities": []
+        },
+        {
+          "text": "that was fast thanks",
+          "entities": []
+        },
+        {
+          "text": "you made my day thanks",
+          "entities": []
+        },
+        {
+          "text": "excellent support thank you",
+          "entities": []
+        },
+        {
+          "text": "I'm satisfied with your help thanks",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "order_status",
+      "description": "Customer asks about order status or tracking",
+      "examples": [
+        {
+          "text": "where is my order",
+          "entities": []
+        },
+        {
+          "text": "track my package",
+          "entities": []
+        },
+        {
+          "text": "when will my order arrive",
+          "entities": []
+        },
+        {
+          "text": "what's the status of my delivery",
+          "entities": []
+        },
+        {
+          "text": "has my order shipped yet",
+          "entities": []
+        },
+        {
+          "text": "I want to know where my package is",
+          "entities": []
+        },
+        {
+          "text": "can I track my order",
+          "entities": []
+        },
+        {
+          "text": "my order hasn't arrived yet",
+          "entities": []
+        },
+        {
+          "text": "order tracking information",
+          "entities": []
+        },
+        {
+          "text": "when is my delivery expected",
+          "entities": []
+        },
+        {
+          "text": "check order status",
+          "entities": []
+        },
+        {
+          "text": "estimated delivery date",
+          "entities": []
+        },
+        {
+          "text": "give me tracking number",
+          "entities": []
+        },
+        {
+          "text": "is my package on the way",
+          "entities": []
+        },
+        {
+          "text": "my shipment is late",
+          "entities": []
+        },
+        {
+          "text": "delivery update please",
+          "entities": []
+        },
+        {
+          "text": "what's happening with my order",
+          "entities": []
+        },
+        {
+          "text": "order still processing",
+          "entities": []
+        },
+        {
+          "text": "any update on my package",
+          "entities": []
+        },
+        {
+          "text": "where's my stuff",
+          "entities": []
+        },
+        {
+          "text": "how long until my order arrives",
+          "entities": []
+        },
+        {
+          "text": "I placed an order three days ago where is it",
+          "entities": []
+        },
+        {
+          "text": "show me the shipping progress",
+          "entities": []
+        },
+        {
+          "text": "what carrier is delivering my package",
+          "entities": []
+        },
+        {
+          "text": "has my item been dispatched",
+          "entities": []
+        },
+        {
+          "text": "I need the tracking link for my order",
+          "entities": []
+        },
+        {
+          "text": "when was my order shipped",
+          "entities": []
+        },
+        {
+          "text": "is there a delay with my delivery",
+          "entities": []
+        },
+        {
+          "text": "my package seems stuck in transit",
+          "entities": []
+        },
+        {
+          "text": "what is the expected arrival date",
+          "entities": []
+        },
+        {
+          "text": "I haven't received my order yet",
+          "entities": []
+        },
+        {
+          "text": "order confirmation says shipped but no update",
+          "entities": []
+        },
+        {
+          "text": "how do I check my shipping status",
+          "entities": []
+        },
+        {
+          "text": "tell me when my order will be delivered",
+          "entities": []
+        },
+        {
+          "text": "I'm waiting for a package from you",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "return_product",
+      "description": "Customer wants to return a product",
+      "examples": [
+        {
+          "text": "I want to return this item",
+          "entities": []
+        },
+        {
+          "text": "how do I return a product",
+          "entities": []
+        },
+        {
+          "text": "I need to send this back",
+          "entities": []
+        },
+        {
+          "text": "what is your return policy",
+          "entities": []
+        },
+        {
+          "text": "can I get a return label",
+          "entities": []
+        },
+        {
+          "text": "I'd like to return my purchase",
+          "entities": []
+        },
+        {
+          "text": "return this order",
+          "entities": []
+        },
+        {
+          "text": "I want to ship this item back to you",
+          "entities": []
+        },
+        {
+          "text": "initiate a return",
+          "entities": []
+        },
+        {
+          "text": "how many days do I have to return",
+          "entities": []
+        },
+        {
+          "text": "where do I drop off the return",
+          "entities": []
+        },
+        {
+          "text": "return shipping address",
+          "entities": []
+        },
+        {
+          "text": "is return shipping free",
+          "entities": []
+        },
+        {
+          "text": "I need a prepaid return label",
+          "entities": []
+        },
+        {
+          "text": "start the return process",
+          "entities": []
+        },
+        {
+          "text": "can I exchange this instead of returning",
+          "entities": []
+        },
+        {
+          "text": "return window for this product",
+          "entities": []
+        },
+        {
+          "text": "I changed my mind I want to send it back",
+          "entities": []
+        },
+        {
+          "text": "this doesn't fit I need to return it",
+          "entities": []
+        },
+        {
+          "text": "how to arrange a return pickup",
+          "entities": []
+        },
+        {
+          "text": "the item is the wrong size can I return it",
+          "entities": []
+        },
+        {
+          "text": "I want to swap this for a different one",
+          "entities": []
+        },
+        {
+          "text": "what are the conditions for returning items",
+          "entities": []
+        },
+        {
+          "text": "do I need the original packaging to return",
+          "entities": []
+        },
+        {
+          "text": "print a return slip for me",
+          "entities": []
+        },
+        {
+          "text": "I'd like an exchange not a return",
+          "entities": []
+        },
+        {
+          "text": "the product doesn't match the description I want to return it",
+          "entities": []
+        },
+        {
+          "text": "send me a return authorization number",
+          "entities": []
+        },
+        {
+          "text": "can I return after 30 days",
+          "entities": []
+        },
+        {
+          "text": "I received the wrong item I need to return it",
+          "entities": []
+        },
+        {
+          "text": "schedule a return pickup at my address",
+          "entities": []
+        },
+        {
+          "text": "where is the nearest drop off point for returns",
+          "entities": []
+        },
+        {
+          "text": "do you offer free return shipping",
+          "entities": []
+        },
+        {
+          "text": "I opened the package can I still return",
+          "entities": []
+        },
+        {
+          "text": "what happens after I ship my return",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "refund_request",
+      "description": "Customer requests a refund or money back",
+      "examples": [
+        {
+          "text": "I want a refund",
+          "entities": []
+        },
+        {
+          "text": "can I get my money back",
+          "entities": []
+        },
+        {
+          "text": "please process my refund",
+          "entities": []
+        },
+        {
+          "text": "I need a refund for this order",
+          "entities": []
+        },
+        {
+          "text": "when will I receive my refund",
+          "entities": []
+        },
+        {
+          "text": "refund status",
+          "entities": []
+        },
+        {
+          "text": "I was charged incorrectly please refund me",
+          "entities": []
+        },
+        {
+          "text": "how long does a refund take",
+          "entities": []
+        },
+        {
+          "text": "give me my money back",
+          "entities": []
+        },
+        {
+          "text": "issue a refund please",
+          "entities": []
+        },
+        {
+          "text": "I want my money refunded to my card",
+          "entities": []
+        },
+        {
+          "text": "refund hasn't appeared in my bank account",
+          "entities": []
+        },
+        {
+          "text": "I'm still waiting for my refund",
+          "entities": []
+        },
+        {
+          "text": "credit my account back please",
+          "entities": []
+        },
+        {
+          "text": "where is my refund",
+          "entities": []
+        },
+        {
+          "text": "refund to my original payment method",
+          "entities": []
+        },
+        {
+          "text": "I was overcharged I need money back",
+          "entities": []
+        },
+        {
+          "text": "process the refund immediately",
+          "entities": []
+        },
+        {
+          "text": "how do I get a refund",
+          "entities": []
+        },
+        {
+          "text": "refund my purchase price",
+          "entities": []
+        },
+        {
+          "text": "I demand a full refund right now",
+          "entities": []
+        },
+        {
+          "text": "reimburse me for the defective product",
+          "entities": []
+        },
+        {
+          "text": "the refund should have arrived by now",
+          "entities": []
+        },
+        {
+          "text": "can I get store credit instead of a refund",
+          "entities": []
+        },
+        {
+          "text": "refund the difference in price",
+          "entities": []
+        },
+        {
+          "text": "I returned the item but no refund yet",
+          "entities": []
+        },
+        {
+          "text": "partial refund for damaged goods",
+          "entities": []
+        },
+        {
+          "text": "how many business days for the refund to process",
+          "entities": []
+        },
+        {
+          "text": "will the refund go back to my credit card",
+          "entities": []
+        },
+        {
+          "text": "I never received the item I want my money back",
+          "entities": []
+        },
+        {
+          "text": "the service was terrible I expect a refund",
+          "entities": []
+        },
+        {
+          "text": "do you have a money back guarantee",
+          "entities": []
+        },
+        {
+          "text": "I want to be reimbursed for shipping costs",
+          "entities": []
+        },
+        {
+          "text": "apply the refund to my next purchase",
+          "entities": []
+        },
+        {
+          "text": "why is my refund only partial",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "complaint",
+      "description": "Customer files a complaint about quality or experience",
+      "examples": [
+        {
+          "text": "I have a complaint",
+          "entities": []
+        },
+        {
+          "text": "this product is defective",
+          "entities": []
+        },
+        {
+          "text": "I received a damaged item",
+          "entities": []
+        },
+        {
+          "text": "the quality is terrible",
+          "entities": []
+        },
+        {
+          "text": "this is not what I ordered",
+          "entities": []
+        },
+        {
+          "text": "I'm very disappointed with this purchase",
+          "entities": []
+        },
+        {
+          "text": "the wrong item was delivered",
+          "entities": []
+        },
+        {
+          "text": "product arrived broken",
+          "entities": []
+        },
+        {
+          "text": "I want to file a complaint",
+          "entities": []
+        },
+        {
+          "text": "terrible experience with your service",
+          "entities": []
+        },
+        {
+          "text": "your product quality is awful",
+          "entities": []
+        },
+        {
+          "text": "this item doesn't work at all",
+          "entities": []
+        },
+        {
+          "text": "I am extremely unhappy",
+          "entities": []
+        },
+        {
+          "text": "this is unacceptable",
+          "entities": []
+        },
+        {
+          "text": "worst purchase I've ever made",
+          "entities": []
+        },
+        {
+          "text": "the package was damaged when it arrived",
+          "entities": []
+        },
+        {
+          "text": "missing parts in my order",
+          "entities": []
+        },
+        {
+          "text": "the color is completely different from the photo",
+          "entities": []
+        },
+        {
+          "text": "very poor quality product",
+          "entities": []
+        },
+        {
+          "text": "I am dissatisfied with my order",
+          "entities": []
+        },
+        {
+          "text": "the stitching is already coming apart",
+          "entities": []
+        },
+        {
+          "text": "I've had nothing but problems with this product",
+          "entities": []
+        },
+        {
+          "text": "the item stopped working after one day",
+          "entities": []
+        },
+        {
+          "text": "this looks nothing like the pictures on your website",
+          "entities": []
+        },
+        {
+          "text": "there was a scratch on the product out of the box",
+          "entities": []
+        },
+        {
+          "text": "I'm furious about the poor quality",
+          "entities": []
+        },
+        {
+          "text": "the food was stale when it arrived",
+          "entities": []
+        },
+        {
+          "text": "your packaging is horrible everything was crushed",
+          "entities": []
+        },
+        {
+          "text": "I ordered two but only got one and it was broken",
+          "entities": []
+        },
+        {
+          "text": "the instructions are missing and the product is faulty",
+          "entities": []
+        },
+        {
+          "text": "I'm really upset about the service I got",
+          "entities": []
+        },
+        {
+          "text": "the expiration date had already passed",
+          "entities": []
+        },
+        {
+          "text": "this is a scam the product is fake",
+          "entities": []
+        },
+        {
+          "text": "I want to report a quality issue",
+          "entities": []
+        },
+        {
+          "text": "the screen has dead pixels right out of the box",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "product_inquiry",
+      "description": "Customer asks about product details, specs, or availability",
+      "examples": [
+        {
+          "text": "do you have this in stock",
+          "entities": []
+        },
+        {
+          "text": "what sizes are available",
+          "entities": []
+        },
+        {
+          "text": "tell me about this product",
+          "entities": []
+        },
+        {
+          "text": "is this item available in blue",
+          "entities": []
+        },
+        {
+          "text": "what are the specifications",
+          "entities": []
+        },
+        {
+          "text": "how much does this cost",
+          "entities": []
+        },
+        {
+          "text": "is this compatible with my device",
+          "entities": []
+        },
+        {
+          "text": "what material is this made of",
+          "entities": []
+        },
+        {
+          "text": "do you ship internationally",
+          "entities": []
+        },
+        {
+          "text": "when will this be back in stock",
+          "entities": []
+        },
+        {
+          "text": "what colors does this come in",
+          "entities": []
+        },
+        {
+          "text": "what's the price of this item",
+          "entities": []
+        },
+        {
+          "text": "is there a warranty",
+          "entities": []
+        },
+        {
+          "text": "product dimensions please",
+          "entities": []
+        },
+        {
+          "text": "does this come with batteries",
+          "entities": []
+        },
+        {
+          "text": "what's the weight of this product",
+          "entities": []
+        },
+        {
+          "text": "is this waterproof",
+          "entities": []
+        },
+        {
+          "text": "compare this with the pro version",
+          "entities": []
+        },
+        {
+          "text": "any discounts available on this",
+          "entities": []
+        },
+        {
+          "text": "tell me the features of this item",
+          "entities": []
+        },
+        {
+          "text": "how many units are left in stock",
+          "entities": []
+        },
+        {
+          "text": "what is the battery life on this device",
+          "entities": []
+        },
+        {
+          "text": "is there a newer model coming out soon",
+          "entities": []
+        },
+        {
+          "text": "can you tell me about the warranty coverage",
+          "entities": []
+        },
+        {
+          "text": "does this product come in other colors",
+          "entities": []
+        },
+        {
+          "text": "what are the system requirements",
+          "entities": []
+        },
+        {
+          "text": "show me similar products in this category",
+          "entities": []
+        },
+        {
+          "text": "is this product suitable for kids",
+          "entities": []
+        },
+        {
+          "text": "do you have a size guide for this item",
+          "entities": []
+        },
+        {
+          "text": "what is the resolution of this display",
+          "entities": []
+        },
+        {
+          "text": "how much storage does this come with",
+          "entities": []
+        },
+        {
+          "text": "is assembly required for this item",
+          "entities": []
+        },
+        {
+          "text": "can I see customer reviews for this product",
+          "entities": []
+        },
+        {
+          "text": "what are the available configurations",
+          "entities": []
+        },
+        {
+          "text": "does this product work with bluetooth",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "cancel_order",
+      "description": "Customer wants to cancel an order before delivery",
+      "examples": [
+        {
+          "text": "I want to cancel my order",
+          "entities": []
+        },
+        {
+          "text": "please cancel this order",
+          "entities": []
+        },
+        {
+          "text": "can I cancel my purchase",
+          "entities": []
+        },
+        {
+          "text": "cancel order number",
+          "entities": []
+        },
+        {
+          "text": "I changed my mind I want to cancel",
+          "entities": []
+        },
+        {
+          "text": "how do I cancel an order",
+          "entities": []
+        },
+        {
+          "text": "stop my order from shipping",
+          "entities": []
+        },
+        {
+          "text": "I don't want this anymore please cancel",
+          "entities": []
+        },
+        {
+          "text": "cancel my recent purchase",
+          "entities": []
+        },
+        {
+          "text": "is it too late to cancel",
+          "entities": []
+        },
+        {
+          "text": "void my order",
+          "entities": []
+        },
+        {
+          "text": "I placed the wrong order please cancel",
+          "entities": []
+        },
+        {
+          "text": "cancel before it ships",
+          "entities": []
+        },
+        {
+          "text": "I need to cancel right away",
+          "entities": []
+        },
+        {
+          "text": "revoke my order",
+          "entities": []
+        },
+        {
+          "text": "I accidentally ordered this please cancel it",
+          "entities": []
+        },
+        {
+          "text": "withdrawal my order",
+          "entities": []
+        },
+        {
+          "text": "don't ship my order cancel it",
+          "entities": []
+        },
+        {
+          "text": "I no longer need this cancel the order",
+          "entities": []
+        },
+        {
+          "text": "cancellation request",
+          "entities": []
+        },
+        {
+          "text": "undo my last order please",
+          "entities": []
+        },
+        {
+          "text": "I decided not to buy this anymore cancel it",
+          "entities": []
+        },
+        {
+          "text": "can I still cancel if it hasn't shipped",
+          "entities": []
+        },
+        {
+          "text": "please stop processing my order",
+          "entities": []
+        },
+        {
+          "text": "I ordered by mistake please cancel the order",
+          "entities": []
+        },
+        {
+          "text": "remove my order from the system",
+          "entities": []
+        },
+        {
+          "text": "halt the shipment and cancel",
+          "entities": []
+        },
+        {
+          "text": "I found it cheaper elsewhere please cancel",
+          "entities": []
+        },
+        {
+          "text": "cancel all pending orders on my account",
+          "entities": []
+        },
+        {
+          "text": "I want to cancel and reorder with a different address",
+          "entities": []
+        },
+        {
+          "text": "abort this purchase",
+          "entities": []
+        },
+        {
+          "text": "is there a cancellation fee",
+          "entities": []
+        },
+        {
+          "text": "I need to cancel within the cancellation window",
+          "entities": []
+        },
+        {
+          "text": "scratch that order I don't want it",
+          "entities": []
+        },
+        {
+          "text": "please void my recent transaction",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "payment_issue",
+      "description": "Customer has payment, billing, or transaction problems",
+      "examples": [
+        {
+          "text": "my payment failed",
+          "entities": []
+        },
+        {
+          "text": "I was double charged",
+          "entities": []
+        },
+        {
+          "text": "payment not going through",
+          "entities": []
+        },
+        {
+          "text": "card declined when trying to pay",
+          "entities": []
+        },
+        {
+          "text": "billing issue with my account",
+          "entities": []
+        },
+        {
+          "text": "I see an unauthorized charge",
+          "entities": []
+        },
+        {
+          "text": "what payment methods do you accept",
+          "entities": []
+        },
+        {
+          "text": "can I pay with PayPal",
+          "entities": []
+        },
+        {
+          "text": "my transaction is pending",
+          "entities": []
+        },
+        {
+          "text": "update my payment information",
+          "entities": []
+        },
+        {
+          "text": "credit card not working on your site",
+          "entities": []
+        },
+        {
+          "text": "charged twice for the same order",
+          "entities": []
+        },
+        {
+          "text": "payment declined error",
+          "entities": []
+        },
+        {
+          "text": "why was I charged extra",
+          "entities": []
+        },
+        {
+          "text": "incorrect amount on my credit card statement",
+          "entities": []
+        },
+        {
+          "text": "change my billing address",
+          "entities": []
+        },
+        {
+          "text": "payment confirmation not received",
+          "entities": []
+        },
+        {
+          "text": "do you accept Apple Pay",
+          "entities": []
+        },
+        {
+          "text": "invoice for my order",
+          "entities": []
+        },
+        {
+          "text": "my coupon code isn't working at checkout",
+          "entities": []
+        },
+        {
+          "text": "the promo code gives an error at payment",
+          "entities": []
+        },
+        {
+          "text": "I got charged but the order didn't go through",
+          "entities": []
+        },
+        {
+          "text": "my bank says the transaction was blocked",
+          "entities": []
+        },
+        {
+          "text": "can I split the payment between two cards",
+          "entities": []
+        },
+        {
+          "text": "do you offer installment payment plans",
+          "entities": []
+        },
+        {
+          "text": "the checkout page keeps crashing when I try to pay",
+          "entities": []
+        },
+        {
+          "text": "I need a receipt for tax purposes",
+          "entities": []
+        },
+        {
+          "text": "there's a pending charge that shouldn't be there",
+          "entities": []
+        },
+        {
+          "text": "can I change the card on file for my subscription",
+          "entities": []
+        },
+        {
+          "text": "the total at checkout doesn't match the listed price",
+          "entities": []
+        },
+        {
+          "text": "I was charged sales tax but I'm tax exempt",
+          "entities": []
+        },
+        {
+          "text": "my gift card balance isn't showing at checkout",
+          "entities": []
+        },
+        {
+          "text": "payment security verification keeps failing",
+          "entities": []
+        },
+        {
+          "text": "do you accept cryptocurrency as payment",
+          "entities": []
+        },
+        {
+          "text": "I need to update the expiry date on my saved card",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "account_help",
+      "description": "Customer needs help with login, password, or account settings",
+      "examples": [
+        {
+          "text": "I can't log in to my account",
+          "entities": []
+        },
+        {
+          "text": "reset my password",
+          "entities": []
+        },
+        {
+          "text": "how do I change my email address",
+          "entities": []
+        },
+        {
+          "text": "I forgot my password",
+          "entities": []
+        },
+        {
+          "text": "update my account details",
+          "entities": []
+        },
+        {
+          "text": "delete my account",
+          "entities": []
+        },
+        {
+          "text": "I want to change my shipping address on my profile",
+          "entities": []
+        },
+        {
+          "text": "how do I create an account",
+          "entities": []
+        },
+        {
+          "text": "account settings page not loading",
+          "entities": []
+        },
+        {
+          "text": "my account is locked",
+          "entities": []
+        },
+        {
+          "text": "sign up for a new account",
+          "entities": []
+        },
+        {
+          "text": "verification email not received",
+          "entities": []
+        },
+        {
+          "text": "change my username",
+          "entities": []
+        },
+        {
+          "text": "two factor authentication setup",
+          "entities": []
+        },
+        {
+          "text": "unsubscribe from emails",
+          "entities": []
+        },
+        {
+          "text": "my login credentials don't work",
+          "entities": []
+        },
+        {
+          "text": "how to update my phone number on profile",
+          "entities": []
+        },
+        {
+          "text": "deactivate my account temporarily",
+          "entities": []
+        },
+        {
+          "text": "password reset link expired",
+          "entities": []
+        },
+        {
+          "text": "manage my notification preferences",
+          "entities": []
+        },
+        {
+          "text": "I keep getting logged out automatically",
+          "entities": []
+        },
+        {
+          "text": "how do I merge two accounts",
+          "entities": []
+        },
+        {
+          "text": "my account was hacked what do I do",
+          "entities": []
+        },
+        {
+          "text": "I want to change the name on my account",
+          "entities": []
+        },
+        {
+          "text": "enable two step verification for security",
+          "entities": []
+        },
+        {
+          "text": "the sign up page won't load",
+          "entities": []
+        },
+        {
+          "text": "how do I view my order history in my account",
+          "entities": []
+        },
+        {
+          "text": "I never got the verification code",
+          "entities": []
+        },
+        {
+          "text": "can I have multiple accounts with the same email",
+          "entities": []
+        },
+        {
+          "text": "my profile picture won't upload",
+          "entities": []
+        },
+        {
+          "text": "I want to close my account permanently",
+          "entities": []
+        },
+        {
+          "text": "change the language settings on my account",
+          "entities": []
+        },
+        {
+          "text": "I can't remember my username or email",
+          "entities": []
+        },
+        {
+          "text": "link my social media account to my profile",
+          "entities": []
+        },
+        {
+          "text": "how do I download my account data",
+          "entities": []
+        }
+      ]
+    },
+    {
+      "name": "speak_to_human",
+      "description": "Customer wants to escalate to a live agent",
+      "examples": [
+        {
+          "text": "I want to speak to a human",
+          "entities": []
+        },
+        {
+          "text": "connect me to an agent",
+          "entities": []
+        },
+        {
+          "text": "let me talk to a real person",
+          "entities": []
+        },
+        {
+          "text": "transfer me to customer support",
+          "entities": []
+        },
+        {
+          "text": "I need a human representative",
+          "entities": []
+        },
+        {
+          "text": "can I speak with a manager",
+          "entities": []
+        },
+        {
+          "text": "get me a live agent",
+          "entities": []
+        },
+        {
+          "text": "I don't want to talk to a bot",
+          "entities": []
+        },
+        {
+          "text": "put me through to someone",
+          "entities": []
+        },
+        {
+          "text": "I want real support not automated",
+          "entities": []
+        },
+        {
+          "text": "escalate this to a supervisor",
+          "entities": []
+        },
+        {
+          "text": "is there a human I can chat with",
+          "entities": []
+        },
+        {
+          "text": "this bot isn't helping connect me to staff",
+          "entities": []
+        },
+        {
+          "text": "I need to speak to a person not a machine",
+          "entities": []
+        },
+        {
+          "text": "live chat with a representative",
+          "entities": []
+        },
+        {
+          "text": "operator please",
+          "entities": []
+        },
+        {
+          "text": "I want to call your support team",
+          "entities": []
+        },
+        {
+          "text": "redirect me to human support",
+          "entities": []
+        },
+        {
+          "text": "hand me over to an actual person",
+          "entities": []
+        },
+        {
+          "text": "enough with the bot let me talk to someone",
+          "entities": []
+        },
+        {
+          "text": "can you transfer me to a live representative",
+          "entities": []
+        },
+        {
+          "text": "I'd rather speak with a real agent",
+          "entities": []
+        },
+        {
+          "text": "your automated system isn't resolving my issue",
+          "entities": []
+        },
+        {
+          "text": "give me a phone number to reach a person",
+          "entities": []
+        },
+        {
+          "text": "I insist on talking to a real human being",
+          "entities": []
+        },
+        {
+          "text": "please forward my case to a senior agent",
+          "entities": []
+        },
+        {
+          "text": "is there a way to email a real person",
+          "entities": []
+        },
+        {
+          "text": "the chatbot can't help me I need a human",
+          "entities": []
+        },
+        {
+          "text": "I've been going in circles connect me to staff",
+          "entities": []
+        },
+        {
+          "text": "when is your live support available",
+          "entities": []
+        },
+        {
+          "text": "I need someone who can actually fix this problem",
+          "entities": []
+        },
+        {
+          "text": "are your human agents available right now",
+          "entities": []
+        },
+        {
+          "text": "route me to the complaints department",
+          "entities": []
+        },
+        {
+          "text": "stop giving me automated responses get me a person",
+          "entities": []
+        },
+        {
+          "text": "I want to file a formal complaint with a manager",
+          "entities": []
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "name": "product",
+      "description": "Product names or categories",
+      "values": [
+        "laptop",
+        "phone",
+        "tablet",
+        "headphones",
+        "charger",
+        "keyboard",
+        "mouse",
+        "monitor",
+        "camera",
+        "speaker"
+      ]
+    },
+    {
+      "name": "color",
+      "description": "Product color options",
+      "values": [
+        "red",
+        "blue",
+        "black",
+        "white",
+        "green",
+        "silver",
+        "gold",
+        "pink"
+      ]
+    },
+    {
+      "name": "size",
+      "description": "Size options",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "extra large",
+        "XS",
+        "XL"
+      ]
+    }
+  ],
+  "metadata": {
+    "trainedAt": null,
+    "totalExamples": 420,
+    "version": "1.0.0"
+  }
+}
