@@ -54,5 +54,10 @@ training/vuln-classifier/checkpoints/
 # playwright
 .playwright-mcp/
 
+# screenshots / images (use docs/ for intentional documentation images)
+*.png
+*.jpg
+*.jpeg
+
 # strategy docs (private)
 USP-RESEARCH-PROMPT.md
