@@ -131,18 +131,19 @@ function selfTrain(
   for (const text of candidatePool) {
     const prediction = predictEnsemble(text, model);
     if (prediction.confidence >= config.pseudoLabelThreshold) {
-      // Verify committee agreement
+      // Verify committee agreement (all 5 classifiers)
       const models = prediction.perModelScores;
       const topIntents = [
         models.logReg[0]?.intent,
         models.naiveBayes[0]?.intent,
         models.svm[0]?.intent,
+        models.mlp[0]?.intent,
         models.gradBoost[0]?.intent,
       ];
       const agreementCount = topIntents.filter((i) => i === prediction.intent).length;
 
-      // Require at least 3/4 models to agree
-      if (agreementCount >= 3) {
+      // Require at least 4/5 models to agree
+      if (agreementCount >= 4) {
         pseudoLabeled.push({ text, intent: prediction.intent });
       }
     }
@@ -218,18 +219,27 @@ function evaluateOnValidation(
 }
 
 /**
- * Run the autonomous self-learning loop
+ * Yield control to the browser event loop so the UI can repaint.
+ * This prevents the tab from freezing during long-running loops.
+ */
+function yieldToUI(): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, 0));
+}
+
+/**
+ * Run the autonomous self-learning loop (async)
  *
  * This is the main entry point. It takes training data and iteratively
  * improves the model through augmentation, self-training, and curriculum learning.
+ * Each iteration yields to the browser event loop so the UI stays responsive.
  *
  * @param onProgress - Callback for progress updates (for UI)
  */
-export function runSelfLearningLoop(
+export async function runSelfLearningLoop(
   originalData: TrainingItem[],
   config: SelfLearnConfig = DEFAULT_SELF_LEARN_CONFIG,
   onProgress?: (iteration: SelfLearnIteration) => void,
-): SelfLearnResult {
+): Promise<SelfLearnResult> {
   const startTime = performance.now();
   const iterations: SelfLearnIteration[] = [];
 
@@ -246,6 +256,9 @@ export function runSelfLearningLoop(
   let stoppedReason = "max_iterations";
 
   for (let iter = 0; iter < config.maxIterations; iter++) {
+    // Yield to browser between iterations so UI can repaint
+    await yieldToUI();
+
     const previousAccuracy = currentAccuracy;
     let augmentedCount = 0;
     let pseudoLabeledCount = 0;

@@ -53,11 +53,8 @@ export default function SelfLearnPage() {
       return;
     }
 
-    // Run async to allow UI updates
-    await new Promise((r) => setTimeout(r, 100));
-
     try {
-      const res = runSelfLearningLoop(allExamples, config, (iteration) => {
+      const res = await runSelfLearningLoop(allExamples, config, (iteration) => {
         setIterations((prev) => [...prev, iteration]);
       });
 

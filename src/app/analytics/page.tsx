@@ -145,12 +145,13 @@ export default function AnalyticsPage() {
             <section className="glass rounded-xl p-6 mb-6">
               <h2 className="text-lg font-semibold text-white mb-4">Ensemble Meta-Weights</h2>
               <p className="text-xs text-gray-500 mb-4">Learned via 3-fold cross-validated grid search. Higher weight = more influence on final prediction.</p>
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-5 gap-4">
                 {[
                   { name: "Logistic Regression", weight: model.metaWeights[0], color: "#4c6ef5" },
                   { name: "Complement NB", weight: model.metaWeights[1], color: "#be4bdb" },
                   { name: "Linear SVM", weight: model.metaWeights[2], color: "#f76707" },
-                  { name: "Gradient Boost", weight: model.metaWeights[3], color: "#40c057" },
+                  { name: "Neural Net MLP", weight: model.metaWeights[3], color: "#e64980" },
+                  { name: "Gradient Boost", weight: model.metaWeights[4], color: "#40c057" },
                 ].map((m) => (
                   <div key={m.name} className="text-center">
                     <div

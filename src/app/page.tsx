@@ -132,19 +132,19 @@ export default function Dashboard() {
 
           {/* Engine Info + Drift Status */}
           <section aria-label="Engine information" className="glass rounded-xl p-6">
-            <h2 className="text-lg font-semibold text-white mb-3">Engine: Ensemble v2</h2>
+            <h2 className="text-lg font-semibold text-white mb-3">Engine: Ensemble v3</h2>
             <p className="text-sm text-gray-400 mb-4 leading-relaxed">
-              4-classifier stacking ensemble with cross-validated meta-weights. Logistic Regression, Complement Naive Bayes,
-              Linear SVM (Pegasos), and Gradient Boosted Stumps — combined through learned weighted averaging.
+              5-classifier stacking ensemble with cross-validated meta-weights. Logistic Regression, Complement Naive Bayes,
+              Linear SVM (Pegasos), MLP Neural Network, and Gradient Boosted Stumps — combined through learned weighted averaging.
             </p>
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div className="bg-surface-3/50 rounded-lg p-3">
                 <p className="text-xs text-gray-500 mb-1">Architecture</p>
-                <p className="text-sm font-medium text-white">4-Model Stacking</p>
+                <p className="text-sm font-medium text-white">5-Model Stacking</p>
               </div>
               <div className="bg-surface-3/50 rounded-lg p-3">
                 <p className="text-xs text-gray-500 mb-1">Features</p>
-                <p className="text-sm font-medium text-white">MurmurHash3 4096-d</p>
+                <p className="text-sm font-medium text-white">MurmurHash3 1024-d</p>
               </div>
               <div className="bg-surface-3/50 rounded-lg p-3">
                 <p className="text-xs text-gray-500 mb-1">Export Formats</p>

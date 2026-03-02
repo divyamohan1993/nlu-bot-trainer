@@ -197,7 +197,7 @@ export default function TrainPage() {
         <div className="max-w-4xl">
           <header className="mb-8">
             <h1 className="text-3xl font-bold text-white tracking-tight">Train Model</h1>
-            <p className="text-gray-500 mt-1">Train the 4-classifier stacking ensemble on your training data</p>
+            <p className="text-gray-500 mt-1">Train the 5-classifier stacking ensemble on your training data</p>
           </header>
 
           {/* Training Data Summary */}
@@ -265,7 +265,7 @@ export default function TrainPage() {
                 <p className="text-xs text-gray-500 mt-1">
                   {status === "complete"
                     ? `Last trained: ${model ? new Date(model.trainedAt).toLocaleString() : "never"}`
-                    : "4-classifier stacking with cross-validated meta-weights"}
+                    : "5-classifier stacking with cross-validated meta-weights"}
                 </p>
               </div>
               <div className="flex gap-2">
@@ -349,7 +349,7 @@ export default function TrainPage() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-white">Cross-Validation</p>
-                      <p className="text-xs text-gray-500">5-fold stratified</p>
+                      <p className="text-xs text-gray-500">3-fold stratified</p>
                     </div>
                   </div>
                 )}

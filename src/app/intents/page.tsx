@@ -128,10 +128,13 @@ export default function IntentsPage() {
     setEditingIntent(null);
   };
 
+  const [genError, setGenError] = useState<string | null>(null);
+
   const generateExamples = async () => {
     const intent = data?.intents.find((i) => i.id === selectedIntent);
     if (!data || !intent || generating) return;
     setGenerating(true);
+    setGenError(null);
     try {
       const res = await fetch("/api/generate", {
         method: "POST",
@@ -145,7 +148,7 @@ export default function IntentsPage() {
       });
       const result = await res.json();
       if (!res.ok) {
-        alert(result.error || "Generation failed");
+        setGenError(result.error || "Generation failed");
         return;
       }
       const newExamples: TrainingExample[] = (result.examples as string[]).map(
@@ -166,7 +169,7 @@ export default function IntentsPage() {
       };
       persist(updated);
     } catch (err) {
-      alert(`Generation error: ${err instanceof Error ? err.message : String(err)}`);
+      setGenError(`Network error: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setGenerating(false);
     }
@@ -350,7 +353,7 @@ export default function IntentsPage() {
                         onClick={generateExamples}
                         disabled={generating}
                         className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-600/20 hover:bg-amber-600/30 border border-amber-500/30 text-amber-400 text-xs font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        title="Generate synthetic examples with Gemini AI"
+                        title="Generate synthetic examples with Gemini AI (requires GOOGLE_API_KEY in .env.local)"
                       >
                         {generating ? (
                           <>
@@ -371,6 +374,19 @@ export default function IntentsPage() {
                       </button>
                     </div>
                   </div>
+                  {genError && (
+                    <div className="mb-3 p-2.5 rounded-lg bg-red-500/10 border border-red-500/20 text-xs text-red-400 flex items-start gap-2">
+                      <svg className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                      </svg>
+                      <span>{genError}</span>
+                      <button onClick={() => setGenError(null)} className="ml-auto text-red-400/60 hover:text-red-400">
+                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
                   {currentIntent.examples.length === 0 ? (
                     <div className="text-center py-12">
                       <p className="text-sm text-gray-600">

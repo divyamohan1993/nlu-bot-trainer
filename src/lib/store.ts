@@ -571,18 +571,37 @@ export function loadEnsembleModel(): EnsembleModel | null {
 
 export function saveEnsembleModel(model: EnsembleModel): void {
   if (typeof window === "undefined") return;
-  // Clear old models first to free space
+  // Clear old active model keys to free space
   localStorage.removeItem(ENSEMBLE_KEY);
   localStorage.removeItem(MODEL_KEY);
-  // Evict any stored model version artifacts to make room
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key?.startsWith("nlu-model-v-")) {
-      localStorage.removeItem(key);
-      i--; // adjust index after removal
+  // Note: we do NOT evict nlu-model-v-* keys here — those belong to the
+  // model registry and are needed for version rollback. If localStorage
+  // quota is exceeded, the registry's own eviction logic should handle it.
+  try {
+    localStorage.setItem(ENSEMBLE_KEY, serializeEnsemble(model));
+  } catch (e) {
+    // If quota exceeded, evict oldest version artifacts as a last resort
+    if (e instanceof DOMException && e.name === "QuotaExceededError") {
+      const versionKeys: string[] = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key?.startsWith("nlu-model-v-")) versionKeys.push(key);
+      }
+      // Remove oldest versions first (sorted lexicographically, oldest = lowest semver)
+      versionKeys.sort();
+      for (const key of versionKeys) {
+        localStorage.removeItem(key);
+        try {
+          localStorage.setItem(ENSEMBLE_KEY, serializeEnsemble(model));
+          return; // success after eviction
+        } catch {
+          continue; // still not enough space, evict next
+        }
+      }
+      throw e; // re-throw if we still can't save after evicting everything
     }
+    throw e;
   }
-  localStorage.setItem(ENSEMBLE_KEY, serializeEnsemble(model));
 }
 
 export function clearEnsembleModel(): void {
