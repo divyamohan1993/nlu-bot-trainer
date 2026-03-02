@@ -45,5 +45,11 @@ training/*.min.json
 training/__pycache__/
 *.pyc
 
+# model weights (too large for Git — download with scripts/download-model.sh)
+public/models/vuln-classifier/weights.json
+public/models/vuln-classifier/best_model.pt
+training/vuln-classifier/output/
+training/vuln-classifier/checkpoints/
+
 # playwright
 .playwright-mcp/

@@ -1,0 +1,8 @@
+torch
+scikit-learn
+datasets
+pandas
+onnx
+onnxruntime
+tqdm
+pyarrow

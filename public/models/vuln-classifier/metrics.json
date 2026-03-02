@@ -1,0 +1,11 @@
+{
+  "top1_accuracy": 0.7096543717067072,
+  "top5_accuracy": 0.847,
+  "inference_avg_ms": 1.54,
+  "inference_p99_ms": 1.6,
+  "num_classes": 349,
+  "num_parameters": 9690589,
+  "train_examples": 226390,
+  "test_examples": 27949,
+  "best_val_acc": 0.7096543717067072
+}
