@@ -1,5 +1,6 @@
 {
   "name": "nlu-bot-trainer",
+  "packageManager": "pnpm@10.30.1",
   "version": "2.2.0",
   "private": false,
   "description": "NLU bot trainer (5-classifier ensemble, 171K params, browser-side) + 4-mode vulnerability triage: ML classification (9.7M param ResNet-MLP, 349 CWEs), CVE ID lookup (NVD), code scanning (regex), dependency audit (OSV)",
